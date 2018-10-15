@@ -92,4 +92,18 @@ def TBME(Z):
 	u[2,2,2,2] = (17*Z)/256.0
 	return u
 
-u = TBME(Z=1)
+
+def OBME(Z):
+    '''Hard-coded One-Body Matrix Elements (OBME)'''
+
+    v = np.zeros((3,3))
+    
+    v[0,0] = -Z*Z/2
+    v[1,1] = -Z*Z/8
+    v[2,2] = -Z*Z/18
+    return v
+
+
+if __name__ == '__main__':
+    u = TBME(Z=1)
+    v = OBME(Z=1)
