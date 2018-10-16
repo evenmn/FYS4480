@@ -1,5 +1,16 @@
 import numpy as np
 
+
+def OBME(Z):
+    '''Hard-coded One-Body Matrix Elements (OBME)'''
+
+    v = np.zeros((3,3))
+    v[0,0] = -Z*Z/2
+    v[1,1] = -Z*Z/8
+    v[2,2] = -Z*Z/18
+    return v
+
+
 def TBME(Z):
 
 	'''
@@ -91,17 +102,6 @@ def TBME(Z):
 	u[2,2,2,1] = (6890942464*np.sqrt(2/3)*Z)/1210689028125.0
 	u[2,2,2,2] = (17*Z)/256.0
 	return u
-
-
-def OBME(Z):
-    '''Hard-coded One-Body Matrix Elements (OBME)'''
-
-    v = np.zeros((3,3))
-    
-    v[0,0] = -Z*Z/2
-    v[1,1] = -Z*Z/8
-    v[2,2] = -Z*Z/18
-    return v
 
 
 if __name__ == '__main__':
