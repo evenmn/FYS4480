@@ -18,7 +18,7 @@ The Hamiltonian now reads
 \begin{equation}
 \hat{H}=\hat{H}_0 + \hat{H}_I=\sum_{i=1}^N\hat{h}_0(x_i)+\sum_{i<j}^N\frac{1}{r_{ij}}
 \end{equation}
-with $r_{ij}\equiv\frac{1}{|\boldsymbol{r}_i-\boldsymbol{r}_j|}$ and $\hat{h}_0$ as the one-body operator for each electron. The single particle wave functions (SPF) are assumed to be hydrogen-like, where the one-body energies are known from the Bohr model, stating
+with $r_{ij}\equiv\frac{1}{|\boldsymbol{r}_i-\boldsymbol{r}_j|}$ and $\hat{h}_0$ as the one-body operator for each electron. The single particle functions (SPF) are assumed to be hydrogen-like, where the one-body energies are known from the Bohr model, stating
 \begin{equation}
 E_n=-\frac{Z^2}{2n^2}
 \end{equation}
@@ -26,7 +26,13 @@ where $n$ is the number of nodes in the wave function. In order to calculate the
 \begin{equation}
 \int r_1^2dr_1\int r_2^2dr_2 \Phi_{\alpha}^*(r_1)\Phi_{\beta}^*(r_2)\frac{1}{|\boldsymbol{r}_1-\boldsymbol{r}_2|}\Phi_{\gamma}(r_1)\Phi_{\delta}(r_2)\equiv\mel{\alpha\beta}{\hat{v}}{\gamma\delta}
 \end{equation}
-where the Dirac notation is used for shorthand notation. 
+where the Dirac notation is used for shorthand notation. Note carefully that the $\Phi$'s are the total wave functions, where both the radial and spin parts are included. The spin part is known to not affect the energies, and it can therefore be factorized out,
+\begin{align}
+\mel{\alpha\beta}{\hat{v}}{\gamma\delta}&=(\alpha\beta|\hat{v}|\gamma\delta)\braket{\chi_{\alpha}\chi_{\beta}}{\chi_{\gamma}\chi_{\delta}}\notag\\
+&=(\alpha\beta|\hat{v}|\gamma\delta)\braket{\chi_{\alpha}}{\chi_{\gamma}}\braket{\chi_{\beta}}{\chi_{\delta}}\\
+&=(\alpha\beta|\hat{v}|\gamma\delta)\,\delta_{\sigma_{\alpha}\sigma_{\gamma}}\delta_{\sigma_{\beta}\sigma_{\delta}}.\notag
+\end{align}
+We observe that the integral is non-zero if and only if $\alpha$ and $\gamma$ got the same spin, and $\beta$ and $\delta$ got the same spin.
 
 For calculating the ground state energy of an atom with atomic number $Z$, we need to calculate
 \begin{align}
@@ -34,6 +40,11 @@ For calculating the ground state energy of an atom with atomic number $Z$, we ne
 &=E_0(Z)+\hdots
 \end{align}
 See appendix A. 
+
+\subsection{Second Quantization}
+Define the Hamiltonian in second quantization
+
+\subsubsection{Wick's theorem}
 
 Should also write about spins, Pauli principle, quantum numbers and so on. 
 
@@ -52,7 +63,7 @@ Handbook of Chem. and Phys. lide 1992
 
 
 \subsubsection{Ground state}
-Spin up/spin down - Pauli principle
+Spin up/spin down - Pauli principle - Slater determinant - Dirac notation
 \begin{figure} [H]
 	\begin{center}
 		\begin{tikzpicture}[scale=0.9]
