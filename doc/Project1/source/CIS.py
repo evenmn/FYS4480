@@ -32,7 +32,7 @@ class CIS:
         
         
     def c_H_ia(self, i,a):
-        '''hggh'''
+        '''Single excited ket'''
         
         OBT = self.Elements.OBME(i,a)
         
@@ -44,19 +44,9 @@ class CIS:
         
         
     def ia_H_jb(self, i,a,j,b):
-        '''hhh'''
+        '''Single excited bra and ket'''
         
-        
-        '''
-        Result = s2r_antisym(Z,a,j,i,b, a_s,j_s,i_s,b_s)
-        
-        if i==j and i_s==j_s:
-            Result -= v[a,b]
-        if a==b and a_s==b_s:
-            Result += v[i,j]
-        
-        '''
-        Result = self.Elements.TBME(a,j,i,b)
+        Result = self.Elements.Antisym(a,j,i,b)
         
         if a==b:
             Result -= self.Elements.OBME(i,j)
@@ -74,13 +64,4 @@ class CIS:
             for k in range(self.n):
                 Result += self.Elements.Antisym(a,k,b,k)
         
-        
         return Result
-        
-if __name__ == '__main__':
-    basis = ((0,0), (0,1), (1,0), (1,1), (2,0), (2,1))
-    
-    Helium = CIS(2,basis)
-    
-    print(Helium.c_H_c())
-    print(Helium.c_H_ia(0,4))
