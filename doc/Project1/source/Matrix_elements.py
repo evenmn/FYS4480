@@ -14,8 +14,8 @@ def OBME(Z):
 def TBME(Z):
 
 	'''
-	Hardcoded two-body matrix elements (TBME) <pq|V|rs> for project1 in Fys4480.
-	Note that these are the radial integrals and do NOT inculde spin, thus you have 
+	Hardcoded two-body matrix elements (TBME) <pq|V|rs> for project1 in FYS4480.
+	Note that these are the radial integrals and do NOT include spin, thus you have 
 	to properly anti-symmetrize the TBME's yourself.
 	'''
 
@@ -102,6 +102,29 @@ def TBME(Z):
 	u[2,2,2,1] = (6890942464*np.sqrt(2/3)*Z)/1210689028125.0
 	u[2,2,2,2] = (17*Z)/256.0
 	return u
+
+
+def s2r(Z, p,q,r,s, p_s,q_s,r_s,s_s):
+    ''' Returning value of matrix element with given 
+    quantum number p,q,r,s and spin number p_s,q_s,r_s,s_s.
+    Spin up/down is 0/1'''
+    
+    u = TBME(Z)
+    
+    if p_s==r_s and q_s==s_s:
+        return u[p,q,r,s]
+    else:
+        return 0
+        
+
+def s2r_antisym(Z, p,q,r,s, p_s,q_s,r_s,s_s):
+    ''' Returning value of matrix element with given 
+    quantum number p,q,r,s and spin number p_s,q_s,r_s,s_s.
+    Spin up/down is 0/1.
+    Element is now antisymmetric, such that
+    <pq|H|rs>AS=<pq|H|rs>-<pq|H|sr>'''
+    
+    return s2r(Z, p,q,r,s, p_s,q_s,r_s,s_s)-s2r(Z, p,q,s,r, p_s,q_s,s_s,r_s)
 
 
 if __name__ == '__main__':
