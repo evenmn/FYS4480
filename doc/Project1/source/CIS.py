@@ -65,3 +65,52 @@ class CIS:
                 Result += self.Elements.Antisym(a,k,b,k)
         
         return Result
+        
+        
+    def organize(self):
+        '''Set up matrix
+        NEEDS TO BE GENERALIZED AND SIMPLIFIED'''
+    
+        A = np.zeros((5,5))
+
+        # --- <c|H|c> ---
+        A[0,0] = CIS.c_H_c(self)
+
+        # --- <c|H|p_i^a> ---
+        A[0,1] = CIS.c_H_ia(self,0,2)
+        A[0,2] = CIS.c_H_ia(self,1,3)
+        A[0,3] = CIS.c_H_ia(self,0,4)
+        A[0,4] = CIS.c_H_ia(self,1,5)
+
+        # --- <p_i^a|H|c> ---
+        A[1,0] = CIS.c_H_ia(self,0,2)
+        A[2,0] = CIS.c_H_ia(self,1,3)
+        A[3,0] = CIS.c_H_ia(self,0,4)
+        A[4,0] = CIS.c_H_ia(self,1,5)
+
+        # --- <p_i^a|H|p_j^b> ---
+        # <12|H|21>
+        A[1,1] = CIS.ia_H_jb(self,0,2,0,2)
+        A[1,2] = CIS.ia_H_jb(self,0,2,1,3)
+        A[2,1] = CIS.ia_H_jb(self,1,3,0,2)
+        A[2,2] = CIS.ia_H_jb(self,1,3,1,3)
+
+        # <12|H|31>
+        A[1,3] = CIS.ia_H_jb(self,0,2,0,4)
+        A[1,4] = CIS.ia_H_jb(self,0,2,1,5)
+        A[2,3] = CIS.ia_H_jb(self,1,3,0,4)
+        A[2,4] = CIS.ia_H_jb(self,1,3,1,5)
+
+        # <13|H|21>
+        A[3,1] = CIS.ia_H_jb(self,0,4,0,2)
+        A[3,2] = CIS.ia_H_jb(self,1,5,0,2)
+        A[4,1] = CIS.ia_H_jb(self,0,4,1,3)
+        A[4,2] = CIS.ia_H_jb(self,1,5,1,3)
+
+        # <13|H|31>
+        A[3,3] = CIS.ia_H_jb(self,0,4,0,4)
+        A[3,4] = CIS.ia_H_jb(self,0,4,1,5)
+        A[4,3] = CIS.ia_H_jb(self,1,5,0,4)
+        A[4,4] = CIS.ia_H_jb(self,1,5,1,5)
+        
+        return A
