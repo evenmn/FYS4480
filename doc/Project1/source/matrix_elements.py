@@ -14,8 +14,8 @@ def OBME(Z):
 def TBME(Z):
 
 	'''
-	Hardcoded two-body matrix elements (TBME) <pq|V|rs> for project1 in Fys4480.
-	Note that these are the radial integrals and do NOT inculde spin, thus you have 
+	Hardcoded two-body matrix elements (TBME) <pq|V|rs> for project1 in FYS4480.
+	Note that these are the radial integrals and do NOT include spin, thus you have 
 	to properly anti-symmetrize the TBME's yourself.
 	'''
 
