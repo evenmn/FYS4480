@@ -1,7 +1,7 @@
 import numpy as np
 from Matrix_elements import *
 
-def h_HF_elements(i,j, C, Z):
+def h_HF_elements(i,j, C, Z, S=2):
     '''Hartree-Fock matrix elements (a,b) given C and Z
     i<3 => i_s=0, j<3 => j_s=0
     '''
@@ -24,12 +24,12 @@ def h_HF_elements(i,j, C, Z):
     Result = v[i, j]
     
     for p in range(3):
-        for p_s in range(2):
+        for p_s in range(S):
             for c in range(3):
-                for c_s in range(2):
+                for c_s in range(S):
                     for d in range(3):
-                        for d_s in range(2):
-                            Result += C_conj[2*p+p_s,2*c+c_s]*C[2*p+p_s,2*d+d_s]*s2r_antisym(Z, i,c,j,d, i_s,c_s,j_s,d_s)
+                        for d_s in range(S):
+                            Result += C_conj[S*p+p_s,S*c+c_s]*C[S*p+p_s,S*d+d_s]*s2r_antisym(Z, i,c,j,d, i_s,c_s,j_s,d_s)
                             
     return Result
     
