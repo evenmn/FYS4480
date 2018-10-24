@@ -104,6 +104,29 @@ def TBME(Z):
 	return u
 
 
+def s2r(Z, p,q,r,s, p_s,q_s,r_s,s_s):
+    ''' Returning value of matrix element with given 
+    quantum number p,q,r,s and spin number p_s,q_s,r_s,s_s.
+    Spin up/down is 0/1'''
+    
+    u = TBME(Z)
+    
+    if p_s==r_s and q_s==s_s:
+        return u[p,q,r,s]
+    else:
+        return 0
+        
+
+def s2r_antisym(Z, p,q,r,s, p_s,q_s,r_s,s_s):
+    ''' Returning value of matrix element with given 
+    quantum number p,q,r,s and spin number p_s,q_s,r_s,s_s.
+    Spin up/down is 0/1.
+    Element is now antisymmetric, such that
+    <pq|H|rs>AS=<pq|H|rs>-<pq|H|sr>'''
+    
+    return s2r(Z, p,q,r,s, p_s,q_s,r_s,s_s)-s2r(Z, p,q,s,r, p_s,q_s,s_s,r_s)
+
+
 if __name__ == '__main__':
     u = TBME(Z=1)
     v = OBME(Z=1)
