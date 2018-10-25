@@ -1,9 +1,12 @@
 import numpy as np
 from CIS import *
+from Hartree_Fock import *
 
 basis = ((0,0), (0,1), (1,0), (1,1), (2,0), (2,1))
 Beryllium = CIS(4,basis)
+Beryllium_HF = HF(4,basis)
 
+# === Configuration Interaction Singles ===
 A = np.zeros((5,5))
 
 # --- <c|H|c> ---
@@ -48,5 +51,8 @@ A[4,4] = Beryllium.ia_H_jb(3,5,3,5)
 
 eigvals, eigvecs = np.linalg.eigh(A)
 
-print(A)
-print(eigvals)
+print('Ref. Energy: ', A[0,0])
+print('Energy CIS:  ', eigvals[0])
+
+# === Hartree Fock ===
+print('Energy HF:   ', Beryllium_HF.HF_iter())

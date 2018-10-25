@@ -1,9 +1,13 @@
 import numpy as np
 from CIS import *
+from Hartree_Fock import *
 
 basis = ((0,0), (0,1), (1,0), (1,1), (2,0), (2,1))
+
+Helium_HF = HF(2,basis)
 Helium = CIS(2,basis)
 
+# === Configuration Interaction Singles ===
 A = np.zeros((5,5))
 
 # --- <c|H|c> ---
@@ -48,5 +52,8 @@ A[4,4] = Helium.ia_H_jb(1,5,1,5)
 
 eigvals, eigvecs = np.linalg.eigh(A)
 
-print(A)
-print(eigvals)
+print('Ref. Energy: ', A[0,0])
+print('Energy CIS:  ', eigvals[0])
+
+# === Hartree Fock ===
+print('Energy HF:   ', Helium_HF.HF_iter())

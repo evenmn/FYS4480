@@ -51,18 +51,16 @@ class HF:
         else:
             C = np.random.uniform((self.N,self.N))
 
-        for i in range(100):
+        #print('Iter   Energy')
+        #print('--------------------------')
+        for i in range(11):
             HF_mat = HF.HF_matrix(self,C)
+            #print(i,'    ',HF.calc_E(self,C))
+            
             ε, C = np.linalg.eigh(HF_mat)
-            
-            #indices = np.argsort(ε)
-            #C = C[:,indices]
-            
-            print(HF.calc_E(self,C))
-            #print(eigvals)
-            #print(C)
+            C = C.T
         
-        return C
+        return HF.calc_E(self,C)
         
         
     def calc_E(self,C):
@@ -85,9 +83,5 @@ if __name__ == '__main__':
 
     basis = ((0,0), (0,1), (1,0), (1,1), (2,0), (2,1))
     Helium = HF(2,basis)
-
-    A = Helium.HF_matrix(np.eye(6))
-    #print(A)
-    #print(np.linalg.eigh(A))
     
     Helium.HF_iter()
