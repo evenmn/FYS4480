@@ -1,15 +1,28 @@
 \section{Results} \label{sec:results}
 
+
+\subsection{The Helium atom}
 \begin{table} [H]
-	\caption{Mean Square Error and R$^2$-score presented for OLS, Ridge, Lasso and Ridge + gradient descent (RidgeGD), where noise was added to the data. The parameters used were $\lambda=1e-5$ (penalty), $\eta=1e-4$ (learning rate), $\text{niter}=1e5$ (number of iterations) and $\mathcal{N}(0, \sigma^2=0.1)$ (noise). See text for more information.}
-	\begin{tabularx}{\textwidth}{l|XXX|XXX} \hline\hline
-		\label{tab:franke_error}
-		& \multicolumn{3}{c}{\textbf{MSE}}&\multicolumn{3}{c}{\textbf{R2}}\\ \hline
-		&Self&K-fold&Scikit&Self&K-fold&Scikit\\ \hline \\
-		OLS & 0.008494 & 0.009119 & 0.008494 & 0.9048 & 0.8956 & 0.9048 \\
-		Ridge & 0.009128 & 0.009651 & 0.009128 & 0.8977 & 0.8895 & 0.8977 \\
-		Lasso & 0.01439 & 0.01489 & 0.01555 & 0.8387 & 0.8296 & 0.8257 \\
-		RidgeGD & 0.01451 & 0.01504 & 0.009128 & 0.8373 & 0.8280 & 0.8977 \\ \hline
+	\caption{}
+	\begin{tabularx}{\textwidth}{X|X|X} \hline\hline
+		\textbf{Method}&\textbf{Energy} [a.u.]&\textbf{Relative error}\\ \hline
+		Experimental & -2.903694\footnote{Bergerson, 1998} & 0.00\%  \\
+		Reference & -2.750000 & 5.29\% \\
+		CIS & -2.838648 &  2.24\% \\
+		HF & -2.831096 & 2.50\% \\ \hline\hline
+	\end{tabularx}
+\end{table}
+
+\subsection{The Beryllium atom}
+
+\begin{table} [H]
+	\caption{}
+	\begin{tabularx}{\textwidth}{X|X|X} \hline\hline
+		\textbf{Method}&\textbf{Energy} [a.u.]&\textbf{Relative error}\\ \hline
+		Experimental & -14.6674\footnote{Kramida, Martin, 1997} & 0.00\%  \\
+		Reference & -13.7160 & 6.49\% \\
+		CIS & -14.3621 &  2.08\% \\
+		HF & -14.5083 & 1.08\% \\ \hline\hline
 	\end{tabularx}
 \end{table}
 
