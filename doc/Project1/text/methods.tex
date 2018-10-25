@@ -6,7 +6,58 @@ Here we need to show how to go from Schrodinger to the Hamilton matrix. Show som
 Add implementation
 
 \subsection{Hartree-Fock}
+When we calculated the reference energy above, our basis contained only one Slater determinant, more specifically the ground state. In Hartree-Fock, we still have a single Slater determinant basis, but we now construct new SPFs with the constraint of minimizing the energy. 
 
+In general, one can change from one single-particle basis to another by a unitary transform,
+\begin{equation}
+\ket{p}=\sum_{\alpha}c_{p\alpha}\ket{\alpha},
+\end{equation}
+where we use greek letters for the old basis and roman letters for the new one. If we then insert into \eqref{eq:E_ref}, we get a find energy formula with coefficients, $C_{p\lambda}$, that we can vary
+\begin{equation}
+E=\sum_{p}^N\sum_{\alpha\beta}C_{p\alpha}^*C_{p\beta}\mel{\alpha}{\hat{h}_0}{\beta}+\frac{1}{2}
+\sum_{pq}^N\sum_{\alpha\beta\gamma\delta}C_{p\alpha}^*C_{q\beta}^*C_{p\gamma}C_{q\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}_{\text{AS}}.
+\end{equation}
+Further, we assume that also our new basis is orthonormal, i.e,
+\begin{align}
+\braket{p}{q}&=\sum_{\alpha}c_{p\alpha}^*c_{q\alpha}\braket{\alpha}{\alpha}=\sum_{\alpha}c_{p\alpha}^*c_{q\alpha}=\delta_{pq}\\
+&\Rightarrow\sum_{\alpha}c_{p\alpha}^*c_{q\alpha}-\delta_{pq}=0\label{eq:constraint}
+\end{align}
+
+We now have a function, $E$, that we want to minimize with respect to a constraint given in equation \eqref{eq:constraint}. This is a typical situation where Lagrange Multipliers is convenient to use, which in this case can be written as
+\begin{equation}
+{\cal L}(\{C_{p\alpha}\})=E(\{C_{p\alpha}\})-\sum_a\varepsilon_a\Big(\sum_{\alpha}c_{p\alpha}^*c_{q\alpha}-\delta_{pq}\Big).
+\end{equation}
+The variation in reference energy is then find to be
+\begin{equation}
+\delta E=\sum_{a\alpha}\frac{\partial E}{\partial C_{a\alpha}^*}\delta C_{a\alpha}^*+\sum_{a\alpha}\frac{\partial E}{\partial C_{a\alpha}}\delta C_{a\alpha}-\sum_{a\alpha}\varepsilon_a(C_{a\alpha}\delta C_{a\alpha}^*+C_{a\alpha}^*\delta C_{a\alpha})
+\label{eq:E_hf}
+\end{equation}
+which is zero when $E$ is minimized. Each coefficient $C_{a\alpha}$ and $C_{a\alpha}^*$ is independent, so they can be varied independently. Thus
+\begin{equation}
+\bigg(\frac{\partial E}{\partial C_{a\alpha}^*}-\varepsilon_aC_{a\alpha}\bigg)\delta C_{a\alpha}^*=0,
+\end{equation}
+which is satisfied if and only if
+\begin{equation}
+\frac{\partial E}{\partial C_{a\alpha}^*}-\varepsilon_aC_{a\alpha}=0\qquad\forall\,\,\, a,\alpha
+\end{equation}
+The first term can be derived from \eqref{eq:E_hf}, and reads
+\begin{equation}
+\frac{\partial E}{\partial C_{a\alpha}^*}=\sum_{\beta}C_{a\beta}\mel{\alpha}{\hat{h}_0}{\beta}+\sum_p^N\sum_{\beta\gamma\delta}C_{p\beta}^*C_{a\gamma}C_{p\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}_{\text{AS}}.
+\end{equation}
+This results in the equation
+\begin{equation}
+\sum_{\gamma}\hat{h}_{\alpha\gamma}^{\text{HF}}C_{k\gamma}=\varepsilon_kC_{k\gamma}
+\label{eq:HF_sum}
+\end{equation}
+where we have defined
+\begin{equation}
+\hat{h}_{\alpha\gamma}^{\text{HF}}\equiv\mel{\alpha}{\hat{h}_0}{\gamma}+\sum_p^N\sum_{\beta\delta}C_{p\beta}^*C_{p\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}_{\text{AS}}.
+\end{equation}
+We recognize that \eqref{eq:HF_sum} can be written as a matrix-vector product
+\begin{equation}
+\hat{h}^{\text{HF}}C_k=\varepsilon_k^{\text{HF}}C_k
+\end{equation}
+where $C_k$ are columns in our coefficient matrix and $\varepsilon_k^{\text{HF}}$ are just the eigenvalues of $\hat{h}^{\text{HF}}$, they have no physical significance. We will use this equation to find the optimal SPFs (optimal $C_k$'s) and then find the energy from equation \eqref{eq:E_hf}.
 
 The implementation could look something like this
 \lstset{basicstyle=\scriptsize}
