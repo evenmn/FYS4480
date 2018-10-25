@@ -1,90 +1,93 @@
 import numpy as np
 from Matrix_elements import *
 
-def h_HF_elements(i,j, C, Z, S=2):
-    '''Hartree-Fock matrix elements (a,b) given C and Z
-    i<3 => i_s=0, j<3 => j_s=0
-    '''
+
+class HF:
+    '''Hartree-Fock class for atomic structure'''
     
-    if i<3:
-        i_s = 0
-    else: 
-        i = i-3
-        i_s = 1
+    def __init__(self, Z, basis):
+        '''
+        Arguments:
+        ----------
+        Z:      Int.
+                Atomic number (proton number)
+        '''
         
-    if j<3:
-        j_s = 0
-    else:
-        j = j-3
-        j_s = 1
-    
-    v = OBME(Z)
-    
-    Result = v[i, j]
-    
-    for p in range(2):
-      for p_s in range(S):
-        for c in range(2):
-          for c_s in range(S):
-            for d in range(2):
-              for d_s in range(S):
-                Result += C[S*p+p_s,S*c+c_s]*C[S*p+p_s,S*d+d_s]*s2r_antisym(Z, i,c,j,d, i_s,c_s,j_s,d_s)
+        self.elem = Integrals(Z,basis)  # Matrix elements/integrals
+        self.n = Z                      # Number of electrons, assuming neutral atom
+        self.N = len(basis)             # Number of states
+
+
+    def HF_elements(self,i,j,C):
+        '''HF matrix elements (i,j)'''
+        
+        Result = self.elem.OBME(i, j)
+        
+        for p in range(self.n):
+            for c in range(self.N):
+                for d in range(self.N):
+                    Result += C[p,c]*C[p,d]*self.elem.AS(i,c,j,d)
+                                
+        return Result
+        
+        
+    def HF_matrix(self,C):
+        '''HF-matrix'''
+        
+        HF_mat = np.empty((self.N,self.N))
+        
+        for i in range(self.N):
+            for j in range(self.N):
+                HF_mat[i,j] = HF.HF_elements(self,i,j,C)
+        
+        return HF_mat
+       
+       
+    def HF_iter(self,initialize='identity'):
+        '''Solving HF with an iterative scheme'''
+        
+        if initialize=='identity':
+            C = np.eye(self.N)
+        else:
+            C = np.random.uniform((self.N,self.N))
+
+        for i in range(100):
+            HF_mat = HF.HF_matrix(self,C)
+            ε, C = np.linalg.eigh(HF_mat)
+            
+            #indices = np.argsort(ε)
+            #C = C[:,indices]
+            
+            print(HF.calc_E(self,C))
+            #print(eigvals)
+            #print(C)
+        
+        return C
+        
+        
+    def calc_E(self,C):
+        '''Calculate energy'''
+        
+        E = 0
+        for p in range(self.n):
+          for a in range(self.N):
+            for b in range(self.N):
+              E += C[p,a]*C[p,b]*self.elem.OBME(a,b)
+              for q in range(self.n):
+                for c in range(self.N):
+                  for d in range(self.N):
+                    E += 0.5*C[p,a]*C[q,b]*C[p,c]*C[q,d]*self.elem.AS(a,b,c,d)
                             
-    return Result
-    
-    
-def h_HF_matrix(C, Z):
-    '''HF-matrix'''
-    
-    HF = np.empty((6,6))
-    
-    for i in range(6):
-        for j in range(6):
-            HF[i,j] = h_HF_elements(i,j,C,Z)
-    
-    return HF
-   
-   
-def h_HF_iter(Z):
-    '''Solving HF with an iterative scheme'''
-    
-    C = np.eye(6)
-    eigvals = np.ones(6)
-    
-    print(eigvals)
-    
-    #while abs(eigvals[0]) > 0.001:
-    for i in range(10):
-        HF = h_HF_matrix(C, Z)
-        eigvals, C = np.linalg.eigh(HF)
-        print(eigvals)
-        print(C)
-    
-    return C
-    
-    
-def calc_E(C, Z, S=2):
-    '''Calculate energy'''
-    
-    v = OBME(Z)
-    
-    E = 0
-    for p in range(2):
-      for a in range(3):
-        for a_s in range(S):
-          for b in range(3):
-            for b_s in range(S):
-              E += C[p,a]*C[p,b]*v[a,b]
-              for q in range(2):
-                for c in range(3):
-                  for c_s in range(S):
-                    for d in range(3):
-                      for d_s in range(S):
-                        E += C[p,S*a+a_s]*C[q,S*b+b_s]*C[p,S*c+c_s]*C[q,S*d+d_s]*s2r_antisym(Z, a,b,c,d, a_s,b_s,c_s,d_s)
-                        
-    return E
+        return E
     
 
 if __name__ == '__main__':
-    C = h_HF_iter(2)
-    print(calc_E(C, Z=2))
+
+    basis = ((0,0), (0,1), (1,0), (1,1), (2,0), (2,1))
+    Helium = HF(2,basis)
+
+    A = Helium.HF_matrix(np.eye(6))
+    #print(A)
+    #print(np.linalg.eigh(A))
+    
+    Helium.HF_iter()

@@ -16,7 +16,7 @@ class Integrals:
         
 
     def OBME(self,p,q):
-        '''Hard-coded One-Body Matrix Elements (OBME)'''
+        '''One-Body Matrix Elements (OBME)'''
         
         n_p, s_p = self.basis[p]
         n_q, s_q = self.basis[q]
@@ -131,7 +131,7 @@ class Integrals:
             return 0
             
 
-    def Antisym(self,p,q,r,s):
+    def AS(self,p,q,r,s):
         '''Element is now antisymmetric, such that
         <pq|H|rs>AS=<pq|H|rs>-<pq|H|sr>'''
         
