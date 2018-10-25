@@ -55,4 +55,4 @@ print('Ref. Energy: ', A[0,0])
 print('Energy CIS:  ', eigvals[0])
 
 # === Hartree Fock ===
-print('Energy HF:   ', Beryllium_HF.HF_iter())
+print('Energy HF:   ', Beryllium_HF.HF_iter()[0],' in ', Beryllium_HF.HF_iter()[1], ' iterations')

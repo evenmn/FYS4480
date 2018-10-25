@@ -43,24 +43,22 @@ class HF:
         return HF_mat
        
        
-    def HF_iter(self,initialize='identity'):
+    def HF_iter(self,tol=1e-8,max_iter=50):
         '''Solving HF with an iterative scheme'''
         
-        if initialize=='identity':
-            C = np.eye(self.N)
-        else:
-            C = np.random.uniform((self.N,self.N))
-
-        #print('Iter   Energy')
-        #print('--------------------------')
-        for i in range(11):
-            HF_mat = HF.HF_matrix(self,C)
-            #print(i,'    ',HF.calc_E(self,C))
-            
-            ε, C = np.linalg.eigh(HF_mat)
-            C = C.T
+        C = np.eye(self.N)
+        ε = np.ones(self.N)
         
-        return HF.calc_E(self,C)
+        for i in range(max_iter):
+            HF_mat = HF.HF_matrix(self,C)
+            ε_new, C = np.linalg.eigh(HF_mat)
+            C = C.T
+            
+            if abs(ε[0]-ε_new[0]) < tol:
+                break
+            ε = ε_new
+        
+        return HF.calc_E(self,C), i
         
         
     def calc_E(self,C):
