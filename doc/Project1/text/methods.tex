@@ -1,6 +1,23 @@
 \section{Methods} \label{sec:methods}
 
 \subsection{Configuration Interaction (CI)}
+Often, we start with SDs, $\ket{\Phi_p}$, which are the true wavefunctions in the external potential, but are off when interaction is added
+\begin{equation}
+\hat{H}_0\ket{\Phi_p}=\varepsilon_p\ket{\Phi_p},\qquad (\hat{H}_0+\hat{H}_I)\ket{\Phi_p}\neq\varepsilon_p\ket{\Phi_p}.
+\end{equation}
+However, the SDs form a ket basis, meaning we can write out eigenstates of $\hat{H}_I$ as a linear combination of the SDs
+\begin{align}
+\ket{\Psi_0}&=C_0^{(0)}\ket{\Phi_0}+C_1^{(0)}\ket{\Phi_1}+\hdots+C_{N-1}^{(0)}\ket{\Phi_{N-1}}\notag\\
+\ket{\Psi_1}&=C_0^{(1)}\ket{\Phi_0}+C_1^{(1)}\ket{\Phi_1}+\hdots+C_{N-1}^{(1)}\ket{\Phi_{N-1}}\notag\\
+\ket{\Psi_2}&=C_0^{(2)}\ket{\Phi_0}+C_1^{(2)}\ket{\Phi_1}+\hdots+C_{N-1}^{(2)}\ket{\Phi_{N-1}}\\
+&\vdots\qquad\vdots\qquad\vdots\notag\\
+\ket{\Psi_{N-1}}&=C_0^{(N-1)}\ket{\Phi_0}+C_1^{(N-1)}\ket{\Phi_1}+\hdots+C_N^{(N-1)}\ket{\Phi_{N-1}}.\notag
+\end{align}
+such that 
+\begin{equation}
+\hat{H}\ket{\Psi_p}=\varepsilon_p\ket{\Psi_p}.
+\end{equation}
+The Hamiltonian can be rewritten as a double sum over all ...... using the so-called \textit{completeness relation}, 
 Here we need to show how to go from Schrodinger to the Hamilton matrix. Show some general implementations.
 
 Add implementation
@@ -58,6 +75,9 @@ We recognize that \eqref{eq:HF_sum} can be written as a matrix-vector product
 \hat{h}^{\text{HF}}C_k=\varepsilon_k^{\text{HF}}C_k
 \end{equation}
 where $C_k$ are columns in our coefficient matrix and $\varepsilon_k^{\text{HF}}$ are just the eigenvalues of $\hat{h}^{\text{HF}}$, they have no physical significance. We will use this equation to find the optimal SPFs (optimal $C_k$'s) and then find the energy from equation \eqref{eq:E_hf}.
+\begin{equation}
+\hat{h}^{\text{HF}}(C_k^{i+1})C_k^i=\varepsilon_k^{\text{HF}}C_k^i
+\end{equation}
 
 The implementation could look something like this
 \lstset{basicstyle=\scriptsize}
