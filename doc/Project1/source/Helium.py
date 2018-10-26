@@ -50,6 +50,8 @@ A[3,4] = Helium.ia_H_jb(0,4,1,5)
 A[4,3] = Helium.ia_H_jb(1,5,0,4)
 A[4,4] = Helium.ia_H_jb(1,5,1,5)
 
+print(A)
+
 eigvals, eigvecs = np.linalg.eigh(A)
 
 print('Ref. Energy: ', A[0,0])

@@ -89,6 +89,7 @@ which is understand to take the anti-symmetry property. The ground state is illu
 			}
 			\filldraw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
 			\filldraw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
+			\node[] at (0.5,2.6) {$\ket{\Phi_0}$};
 		\end{scope}
 		\end{tikzpicture}
 	\end{center}
@@ -108,18 +109,20 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		{
 			\draw (-1,\i-1) node[anchor=east] {$\i s$} --(2,\i-1);
 		}
-		\filldraw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
-		\draw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
-		\filldraw (1,1) circle (0.25cm);
+		\draw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
+		\filldraw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
+		\filldraw (0,1) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1}^{2}}$};
 		\end{scope}
 		\begin{scope}[xshift=4cm]
 		\foreach \i in {1,...,3}
 		{
 			\draw (-1,\i-1) --(2,\i-1);
 		}
-		\draw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
-		\filldraw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
-		\filldraw (0,1) circle (0.25cm); 
+		\filldraw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
+		\draw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
+		\filldraw (1,1) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{\bar{1}}^{\bar{2}}}$};
 		\end{scope}
 		\begin{scope}[xshift=8cm]
 		\foreach \i in {1,...,3}
@@ -129,6 +132,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\draw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
 		\filldraw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
 		\filldraw (0,2) circle (0.25cm); 
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1}^{3}}$};
 		\end{scope}
 		\begin{scope}[xshift=12cm]
 		\foreach \i in {1,...,3}
@@ -138,6 +142,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\filldraw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
 		\draw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
 		\filldraw (1,2) circle (0.25cm); 
+		\node[] at (0.5,2.6) {$\ket{\Phi_{\bar{1}}^{\bar{3}}}$};
 		\end{scope}
 		\end{tikzpicture}
 		\newline
@@ -151,6 +156,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\draw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
 		\filldraw (0,1) circle (0.25cm);
 		\filldraw (1,1) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1\bar{1}}^{2\bar{2}}}$};
 		\end{scope}
 		\begin{scope}[xshift=4cm]
 		\foreach \i in {1,...,3}
@@ -159,8 +165,9 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		}
 		\draw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
 		\draw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
-		\filldraw (1,2) circle (0.25cm);
-		\filldraw (0,1) circle (0.25cm);
+		\filldraw (0,2) circle (0.25cm); 
+		\filldraw (1,1) circle (0.25cm); 
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1\bar{1}}^{3\bar{2}}}$};
 		\end{scope}
 		\begin{scope}[xshift=8cm]
 		\foreach \i in {1,...,3}
@@ -169,8 +176,9 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		}
 		\draw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
 		\draw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
-		\filldraw (0,2) circle (0.25cm); 
-		\filldraw (1,1) circle (0.25cm); 
+		\filldraw (1,2) circle (0.25cm);
+		\filldraw (0,1) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1\bar{1}}^{2\bar{3}}}$};
 		\end{scope}
 		\begin{scope}[xshift=12cm]
 		\foreach \i in {1,...,3}
@@ -181,14 +189,57 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\draw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
 		\filldraw (0,2) circle (0.25cm); 
 		\filldraw (1,2) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1\bar{1}}^{3\bar{3}}}$};
 		\end{scope}
 		\end{tikzpicture}
 	\end{center}
-	\caption{Possible states in the 1s, 2s and 3s orbitals of Helium.}
+	\caption{Possible states in the 1s, 2s and 3s orbitals of Helium. In the first row, all single excited states are listed, while in the second row all double excited states are listed.}
 	\label{fig:schematic_he}
 \end{figure}
 
 \subsection{The Beryllium atom}
+
+\subsubsection{Ground state}
+Helium is in its ground state when both electrons occupy the 1s orbital, thus they have opposite spins and $M_s=0$. In this project, we will study systems of $M_s=0$ only, such that an electron can only be excited to a state with the same spin. 
+
+Taking the Pauli principle into account, the two-body wavefunction needs to be nulled out if two particles are in the same state, and it should also be antisymmetric under exchange of two particles. We are therefore in need of a Slater Determinant (SD), given by
+\begin{align}
+\Psi(x_1,x_2,\sigma_1,\sigma_2)&=A\mqty|\psi_{\sigma_1}(x_1) & \psi_{\sigma_1}(x_2)\\ \psi_{\sigma_2}(x_1) & \psi_{\sigma_2}(x_2)|\\
+&=A\Big[\psi_{\sigma_1}(x_1)\psi_{\sigma_2}(x_2)-\psi_{\sigma_2}(x_1)\psi_{\sigma_1}(x_2)\Big]
+\end{align}
+where $\psi_{\sigma_1}$ is the SPF with spin $m_s=\sigma_1$ and $A$ is a normalization constant. If we assume that the SPFs are normalized, our ansatz can be written as
+\begin{equation}
+\ket{\Phi_0}=\frac{1}{\sqrt{2}}(\ket{1}\ket{\bar{1}}-\ket{\bar{1}}\ket{1})
+\end{equation}
+with $\ket{\bar{1}}$ describing a particle with principle quantum number 1 and spin $\sigma_2$, which we will illustrate with spin down. In second quantization, we can construct the ground state from the true vacuum,
+\begin{equation}
+\ket{\Phi_0}=a_{1}^{\dagger}a_{\bar{1}}^{\dagger}\ket{0},
+\end{equation}
+which is understand to take the anti-symmetry property. The ground state is illustrated in figure \eqref{fig:schematic_he_gs}.
+\begin{figure} [H]
+	\begin{center}
+		\begin{tikzpicture}[scale=0.9]
+		\begin{scope}
+		\foreach \i in {1,...,3}
+		{
+			\draw (-1,\i-1) node[anchor=east] {$\i s$} --(2,\i-1);
+		}
+		\filldraw (0,0) node[anchor=north,inner sep=.4cm] {$\uparrow$} circle (0.25cm); 
+		\filldraw (1,0) node[anchor=north,inner sep=.4cm] {$\downarrow$} circle (0.25cm);
+		\filldraw (0,1) circle (0.25cm);
+		\filldraw (1,1) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_0}$};
+		\end{scope}
+		\end{tikzpicture}
+	\end{center}
+	\caption{Ground state of Beryllium.}
+	\label{fig:schematic_be_gs}
+\end{figure}
+
+\subsubsection{Excited states}
+When entering excited states, we can risk having angular quantum numbers unlike zero, because $l\in[0,n-1]$. This makes the computations more difficult, but in this project we will ignore that challenge setting $l=0$, and thus limit us to the s-waves. 
+
+Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that case, the possible energy states of the Helium atom are listed in figure \eqref{fig:schematic_he}.
 \begin{figure} [H]
 	\begin{center}
 		\begin{tikzpicture}[scale=0.9]
@@ -202,6 +253,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\draw (0,1) circle (0.25cm);
 		\filldraw (1,1) circle (0.25cm);
 		\filldraw (0,2) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_2^3}$};
 		\end{scope}
 		\begin{scope}[xshift=4cm]
 		\foreach \i in {1,...,3}
@@ -213,6 +265,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\draw (1,1) circle (0.25cm);
 		\filldraw (1,2) circle (0.25cm);
 		\filldraw (0,1) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{\bar{2}}^{\bar{3}}}$};
 		\end{scope}
 		\begin{scope}[xshift=8cm]
 		\foreach \i in {1,...,3}
@@ -224,6 +277,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\filldraw (0,1) circle (0.25cm);
 		\filldraw (1,1) circle (0.25cm);
 		\filldraw (0,2) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1}^{3}}$};
 		\end{scope}
 		\begin{scope}[xshift=12cm]
 		\foreach \i in {1,...,3}
@@ -235,6 +289,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\filldraw (1,1) circle (0.25cm);
 		\filldraw (1,2) circle (0.25cm);
 		\filldraw (0,1) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{\bar{1}}^{\bar{3}}}$};
 		\end{scope}
 		\end{tikzpicture}
 		\newline
@@ -250,6 +305,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\draw (1,1) circle (0.25cm);
 		\filldraw (0,2) circle (0.25cm);
 		\filldraw (1,2) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{2\bar{2}}^{3\bar{3}}}$};
 		\end{scope}
 		\begin{scope}[xshift=4cm]
 		\foreach \i in {1,...,3}
@@ -262,6 +318,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\filldraw (1,2) circle (0.25cm);
 		\filldraw (0,2) circle (0.25cm);
 		\filldraw (0,1) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1\bar{2}}^{3\bar{3}}}$};
 		\end{scope}
 		\begin{scope}[xshift=8cm]
 		\foreach \i in {1,...,3}
@@ -274,6 +331,7 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\filldraw (1,1) circle (0.25cm);
 		\filldraw (0,2) circle (0.25cm);
 		\filldraw (1,2) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{2\bar{1}}^{3\bar{3}}}$};
 		\end{scope}
 		\begin{scope}[xshift=12cm]
 		\foreach \i in {1,...,3}
@@ -286,9 +344,10 @@ Consider now a system consisting of the orbitals 1s, 2s and 3s only. For that ca
 		\filldraw (1,2) circle (0.25cm);
 		\filldraw (0,1) circle (0.25cm);
 		\filldraw (0,2) circle (0.25cm);
+		\node[] at (0.5,2.6) {$\ket{\Phi_{1\bar{1}}^{3\bar{3}}}$};
 		\end{scope}
 		\end{tikzpicture}
 	\end{center}
-	\caption{Possible states in the 1s, 2s and 3s orbitals of Beryllium.}
+	\caption{Possible states in the 1s, 2s and 3s orbitals of Beryllium. In the first row, all single excited states are listed, while in the second row all double excited states are listed.}
 	\label{fig:schematic}
 \end{figure}

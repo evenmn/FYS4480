@@ -1,9 +1,9 @@
 \section{Methods} \label{sec:methods}
-
+To find the energies, we apply two popular methods: \textit{Configuration Interaction} and \textit{Hartree-Fock}.
 \subsection{Configuration Interaction (CI)}
 Often, we start with SDs, $\ket{\Phi_p}$, which are the true wavefunctions in the external potential, but are off when interaction is added
 \begin{equation}
-\hat{H}_0\ket{\Phi_p}=\varepsilon_p\ket{\Phi_p},\qquad (\hat{H}_0+\hat{H}_I)\ket{\Phi_p}\neq\varepsilon_p\ket{\Phi_p}.
+\hat{H}_0\ket{\Phi_i}=\varepsilon_i\ket{\Phi_i},\qquad (\hat{H}_0+\hat{H}_I)\ket{\Phi_i}\neq\varepsilon_i\ket{\Phi_i}.
 \end{equation}
 However, the SDs form a ket basis, meaning we can write out eigenstates of $\hat{H}_I$ as a linear combination of the SDs
 \begin{align}
@@ -17,7 +17,12 @@ such that
 \begin{equation}
 \hat{H}\ket{\Psi_p}=\varepsilon_p\ket{\Psi_p}.
 \end{equation}
-The Hamiltonian can be rewritten as a double sum over all ...... using the so-called \textit{completeness relation}, 
+The Hamiltonian can be rewritten as a double sum over all states using the so-called \textit{completeness relation}, 
+\begin{equation}
+\hat{H}=\sum_{ij}\ket{\Phi_i}\mel{\Phi_i}{\hat{H}}{\Phi_j}\bra{\Phi_j}
+\end{equation}
+such that
+
 Here we need to show how to go from Schrodinger to the Hamilton matrix. Show some general implementations.
 
 Add implementation
@@ -46,20 +51,20 @@ We now have a function, $E$, that we want to minimize with respect to a constrai
 \end{equation}
 The variation in reference energy is then find to be
 \begin{equation}
-\delta E=\sum_{a\alpha}\frac{\partial E}{\partial C_{a\alpha}^*}\delta C_{a\alpha}^*+\sum_{a\alpha}\frac{\partial E}{\partial C_{a\alpha}}\delta C_{a\alpha}-\sum_{a\alpha}\varepsilon_a(C_{a\alpha}\delta C_{a\alpha}^*+C_{a\alpha}^*\delta C_{a\alpha})
+\delta E=\sum_{k\alpha}\frac{\partial E}{\partial C_{k\alpha}^*}\delta C_{k\alpha}^*+\sum_{k\alpha}\frac{\partial E}{\partial C_{k\alpha}}\delta C_{k\alpha}-\sum_{k\alpha}\varepsilon_k(C_{k\alpha}\delta C_{k\alpha}^*+C_{k\alpha}^*\delta C_{k\alpha})
 \label{eq:E_hf}
 \end{equation}
-which is zero when $E$ is minimized. Each coefficient $C_{a\alpha}$ and $C_{a\alpha}^*$ is independent, so they can be varied independently. Thus
+which is zero when $E$ is minimized. Each coefficient $C_{k\alpha}$ and $C_{k\alpha}^*$ is independent, so they can be varied independently. Thus
 \begin{equation}
-\bigg(\frac{\partial E}{\partial C_{a\alpha}^*}-\varepsilon_aC_{a\alpha}\bigg)\delta C_{a\alpha}^*=0,
+\bigg(\frac{\partial E}{\partial C_{k\alpha}^*}-\varepsilon_kC_{k\alpha}\bigg)\delta C_{k\alpha}^*=0,
 \end{equation}
 which is satisfied if and only if
 \begin{equation}
-\frac{\partial E}{\partial C_{a\alpha}^*}-\varepsilon_aC_{a\alpha}=0\qquad\forall\,\,\, a,\alpha
+\frac{\partial E}{\partial C_{k\alpha}^*}-\varepsilon_kC_{k\alpha}=0\qquad\forall\,\,\, k,\alpha
 \end{equation}
 The first term can be derived from \eqref{eq:E_hf}, and reads
 \begin{equation}
-\frac{\partial E}{\partial C_{a\alpha}^*}=\sum_{\beta}C_{a\beta}\mel{\alpha}{\hat{h}_0}{\beta}+\sum_p^N\sum_{\beta\gamma\delta}C_{p\beta}^*C_{a\gamma}C_{p\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}_{\text{AS}}.
+\frac{\partial E}{\partial C_{k\alpha}^*}=\sum_{\beta}C_{k\beta}\mel{\alpha}{\hat{h}_0}{\beta}+\sum_p^N\sum_{\beta\gamma\delta}C_{p\beta}^*C_{k\gamma}C_{p\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}_{\text{AS}}.
 \end{equation}
 This results in the equation
 \begin{equation}
@@ -82,13 +87,77 @@ where $C_k$ are columns in our coefficient matrix and $\varepsilon_k^{\text{HF}}
 The implementation could look something like this
 \lstset{basicstyle=\scriptsize}
 \begin{lstlisting}
-def bootstrap(data, K=1000):
-  dataVec = np.zeros(K)
-  for k in range(K):
-    dataVec[k] = np.average(np.random.choice(data, len(data)))
-  Avg = np.average(dataVec)
-  Var = np.var(dataVec)
-  Std = np.std(dataVec)
-    
-  return Avg, Var, Std
+class HF:
+'''Hartree-Fock class for atomic structure'''
+
+def __init__(self, Z, basis):
+'''
+Arguments:
+----------
+Z:      Int.
+Atomic number (proton number)
+'''
+
+self.elem = Integrals(Z,basis)  # Matrix elements/integrals
+self.n = Z                      # Number of electrons, assuming neutral atom
+self.N = len(basis)             # Number of states
+
+
+def HF_elements(self,i,j,C):
+'''HF matrix elements (i,j)'''
+
+Result = self.elem.OBME(i, j)
+
+for p in range(self.n):
+for c in range(self.N):
+for d in range(self.N):
+Result += C[p,c]*C[p,d]*self.elem.AS(i,c,j,d)
+
+return Result
+
+
+def HF_matrix(self,C):
+'''HF-matrix'''
+
+HF_mat = np.empty((self.N,self.N))
+
+for i in range(self.N):
+for j in range(self.N):
+HF_mat[i,j] = HF.HF_elements(self,i,j,C)
+
+return HF_mat
+
+
+def HF_iter(self,tol=1e-8,max_iter=50):
+'''Solving HF with an iterative scheme'''
+
+C = np.eye(self.N)
+eps = np.ones(self.N)
+
+for i in range(max_iter):
+HF_mat = HF.HF_matrix(self,C)
+eps_new, C = np.linalg.eigh(HF_mat)
+C = C.T
+
+if abs(eps[0]-eps_new[0]) < tol:
+break
+eps = eps_new
+
+return HF.calc_E(self,C), i
+
+
+def calc_E(self,C):
+'''Calculate energy'''
+
+E = 0
+for p in range(self.n):
+for a in range(self.N):
+for b in range(self.N):
+E += C[p,a]*C[p,b]*self.elem.OBME(a,b)
+for q in range(self.n):
+for c in range(self.N):
+for d in range(self.N):
+E += 0.5*C[p,a]*C[q,b]*C[p,c]*C[q,d]*self.elem.AS(a,b,c,d)
+
+return E
 \end{lstlisting}

@@ -2,6 +2,9 @@
 
 
 \subsection{The Helium atom}
+I will start presenting my main results: the ground state energies, and then 
+
+\subsubsection{Ground state energies}
 \begin{table} [H]
 	\caption{}
 	\begin{tabularx}{\textwidth}{X|X|X} \hline\hline
@@ -10,9 +13,55 @@
 		Hylleraas & -2.90363 & 0.0022\% \\
 		Reference & -2.750000 & 5.29\% \\
 		CIS & -2.838648 &  2.24\% \\
-		HF & -2.831096 & 2.50\% \\ \hline\hline
+		HF$_{\text{1 iteration}}$ & -2.829193 & 2.56\% \\
+		HF$_{\text{converge}}$ & -2.831096 & 2.50\% \\ \hline\hline
 	\end{tabularx}
 \end{table}
+
+\subsubsection{CIS}
+Set up matrix and eigenvectors
+
+\begin{equation}
+\hat{H}_{\text{CIS}}=
+\begin{pmatrix}
+-2.750 & 0.179 & 0.179 & 0.088 & 0.088\\
+0.179 & -2.080 & 0.044 & 0.101 & 0.022\\
+0.179 & 0.044 & -2.080 & 0.022 & 0.101\\
+0.088 & 0.101 & 0.022 & -2.023 & 0.012\\
+0.088 & 0.022 & 0.101 & 0.012 & -2.023
+\end{pmatrix}
+\label{eq:H_He}
+\end{equation}
+
+\subsubsection{HF}
+Set up matrix and eigenvectors after first iteration (basically when inserting C=I). 
+Hartree-Fock matrix after one iteration (basically after inserting the identity matrix as the coefficients)
+\begin{equation}
+\hat{h}^{\text{HF}}=
+\begin{pmatrix}
+-0.750 & 0.000 & 0.179 & 0.000 & 0.088 & 0.000\\
+0.000 & -0.750 & 0.000 & 0.179 & 0.000 & 0.088\\
+0.179 & 0.000 & 0.296 & 0.000 & 0.180 & 0.000\\
+0.000 & 0.179 & 0.000 & 0.296 & 0.000 & 0.180\\
+0.088 & 0.000 & 0.180 & 0.000 & 0.164 & 0.000\\
+0.000 & 0.088 & 0.000 & 0.180 & 0.000 & 0.164
+\end{pmatrix}
+\label{eq:h_HF_He_1iter}
+\end{equation}
+After the energy has converged, we find this matrix:
+\begin{equation}
+\hat{h}^{\text{HF}}=
+\begin{pmatrix}
+-0.840 & 0.000 & 0.226 & 0.000 & 0.102 & 0.000\\
+0.000 & -0.840 & 0.000 & 0.226 & 0.000 & 0.102\\
+0.226 & 0.000 & 0.271 & 0.000 & 0.169 & 0.000\\
+0.000 & 0.226 & 0.000 & 0.271 & 0.000 & 0.169\\
+0.102 & 0.000 & 0.169 & 0.000 & 0.159 & 0.000\\
+0.000 & 0.102 & 0.000 & 0.169 & 0.000 & 0.159
+\end{pmatrix}
+\label{eq:h_HF_He_converge}
+\end{equation}
+Observe that they are not very different. Unlike the zeros in matrix \eqref{eq:h_HF_He_1iter}, the zeros in \eqref{eq:h_HF_He_converge} are not exactly zero, but smaller than 1e-17. 
 
 \subsection{The Beryllium atom}
 
