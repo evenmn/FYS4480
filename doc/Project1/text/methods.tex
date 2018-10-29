@@ -1,7 +1,8 @@
 \section{Methods} \label{sec:methods}
-To find the energies, we apply two popular methods: \textit{Configuration Interaction} and \textit{Hartree-Fock}.
+There exist many methods for solving the Schr\"odinger equation. Some of them are exact, but always heavy to deal with. Other are approximation, but hopefully not that expensive. We are going to look at \textit{Configuration Interaction} (CI), which in principle gives the exact energy (then called \textit{Full Configuration Interaction }(FCI)) and \textit{Hartree-Fock}, which is a mean field theory and will not give exact results.
+
 \subsection{Configuration Interaction (CI)}
-Often, we start with SDs, $\ket{\Phi_p}$, which are the true wavefunctions in the external potential, but are off when interaction is added
+Often, we know the true wavefunctions $\ket{\Phi_i}$ in the external potential, but are off when interaction is added
 \begin{equation}
 \hat{H}_0\ket{\Phi_i}=\varepsilon_i\ket{\Phi_i},\qquad (\hat{H}_0+\hat{H}_I)\ket{\Phi_i}\neq\varepsilon_i\ket{\Phi_i}.
 \end{equation}

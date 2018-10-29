@@ -15,9 +15,9 @@
 \vspace{2cm}
 
 \begin{abstract}
-The aim of this project is to study the performance of linear regression in order to fit a two dimensional polynomial to terrain data. Both Ordinary Least Square (OLS), Ridge and Lasso regression methods were implemented, and for minimizing Lasso's cost function Gradient Descent (GD) was used. A fourth method was to minimize the cost function of Ridge using GD. The fitted polynomial was visualized and compared with the data, the Mean Square Error (MSE) and R$^2$-score were analyzed, and finally the polynomial coefficients were studied applying visualization tools and Confidence Intervals (CI). To benchmark the results, we used Scikit Learn.
+This project aims studying the ground state (GS) energy of neural atoms with total spin zero. More precisely we look at Helium and Beryllium, and we limit ourselves to the single-particle orbits 1s, 2s and 3s. Both Configuration interaction (CI) and Hartree-Fock (HF) was used to estimate the energy levels, and as benchmarks recently experimental energy values were used.
 
-We found the self-implemented OLS and Ridge regression functions to reproduce the benchmarks, and Lasso was close to reproducing the benchmark as well. However, the difference between results produced by standard Ridge regression and when minimizing its cost function is large. The OLS regression method is considered as the most successful due to its small MSE and high R$^2$-score.
+For Helium, we found the Configuration Interaction singles (CIS) to give the lowest energy with a relative error of 2.24\%, compared to 2.50\% by using HF. For Beryllium, the situation was different, with 1.08\% relative error when using HF and 2.08\% relative error when using CIS. 
 \end{abstract}
 
 \newpage
