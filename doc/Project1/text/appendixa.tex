@@ -1,2 +1,79 @@
-\section{Appendix A} \label{sec:appendixa}
-Expression for energy of ground state.
+\section{Appendix A - Calculate matrix elements} \label{sec:appendixa}
+Recall that the Hamiltonian in second quantization is 
+
+\begin{align}
+\hat{H}&=\hat{H}_0 + \hat{H}_I\notag\\
+&=\frac{1}{2}\sum_{\alpha\beta}\mel{\alpha}{\hat{h}_0}{\beta}a_{\alpha}^{\dagger}a_{\beta}
++\frac{1}{4}\sum_{\alpha\beta\gamma\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}_{\text{AS}}a_{\alpha}^{\dagger}a_{\beta}^{\dagger}a_{\delta}a_{\gamma}.
+\label{eq:H_sq}
+\end{align}
+
+\subsection{Calculating $\mel{\Phi_0}{\hat{H}}{\Phi_0}$}
+Inserting the Hamiltonian from \eqref{eq:H_sq}, we find
+\begin{align}
+E[\Phi_0]=&\mel{\Phi_0}{\hat{H}}{\Phi_0}\notag\\
+=&\frac{1}{2}\sum_{\alpha\beta}\mel{\alpha}{\hat{h}_0}{\beta}\mel{c}{a_{\alpha}^{\dagger}a_{\beta}}{c}\\
++&\frac{1}{4}\sum_{\alpha\beta\gamma\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}\mel{c}{a_{\alpha}^{\dagger}a_{\beta}^{\dagger}a_{\delta}a_{\gamma}}{c}\notag
+\end{align}
+
+Using that only fully contracted terms contribute (statement from Wick's theorem), we get
+\begin{equation}
+\mel{c}{a_{\alpha}^{\dagger}a_{\beta}}{c}=\delta_{\alpha\beta}
+\end{equation}
+and
+\begin{equation}
+\mel{c}{a_{\alpha}^{\dagger}a_{\beta}^{\dagger}a_{\delta}a_{\gamma}}{c}=\delta_{\alpha\gamma}\delta_{\beta\delta}-\delta_{\alpha\delta}\delta_{\beta\gamma}.
+\end{equation}
+Since the operator to the right is going to remove a particle from the Slater Determinant $\ket{c}$, all the indices need to be $i,j,k,l,\hdots$. We obtain
+\begin{align}
+E[\Phi_0]=\mel{\Phi_0}{\hat{H}}{\Phi_0}&=\sum_i\mel{i}{\hat{h}_0}{i}+\frac{1}{2}\sum_{ij}\Big[\mel{ij}{\hat{v}}{ij}-\mel{ij}{\hat{v}}{ji}\Big].
+\end{align}
+
+\subsection{Calculating $\mel{\Phi_0}{\hat{H}}{\Phi_i^a}$}
+
+\begin{align}
+\mel{\Phi_0}{\hat{H}}{\Phi_i^a}
+=&\frac{1}{2}\sum_{\alpha\beta}\mel{\alpha}{\hat{h}_0}{\beta}\mel{c}{a_{\alpha}^{\dagger}a_{\beta}a_a^{\dagger}a_i}{c}\\
++&\frac{1}{4}\sum_{\alpha\beta\gamma\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}\mel{c}{a_{\alpha}^{\dagger}a_{\beta}^{\dagger}a_{\delta}a_{\gamma}a_a^{\dagger}a_i}{c}\notag
+\end{align}
+
+\begin{align}
+\mel{c}{a_{\alpha}^{\dagger}a_{\beta}a_a^{\dagger}a_i}{c}&=\delta_{\alpha i}\delta_{\beta a}\\
+\mel{c}{a_{\alpha}^{\dagger}a_{\beta}^{\dagger}a_{\delta}a_{\gamma}a_a^{\dagger}a_i}{c}&=\delta_{\alpha i}\delta_{\beta\delta}\delta_{\gamma a}-\delta_{\alpha\delta}\delta_{\beta i}\delta_{\gamma a}\\
+&+\delta_{\alpha\gamma}\delta_{\beta i}\delta_{\delta a}-\delta_{\alpha i}\delta_{\beta\gamma}\delta_{\delta a}
+\end{align}
+
+Using the fact the the matrix elements are symmetric, i.e, $\mel{aj}{\hat{v}}{ij}=\mel{ja}{\hat{v}}{ji}$. 
+
+\begin{equation}
+\mel{\Phi_0}{\hat{H}}{\Phi_i^a}=\mel{i}{\hat{h}_0}{a}+\sum_j\Big[\mel{aj}{\hat{v}}{ij}-\mel{aj}{\hat{v}}{ji}\Big]
+\end{equation}
+
+\subsection{Calculating $\mel{\Phi_i^a}{\hat{H}}{\Phi_j^b}$}
+\begin{align}
+\mel{\Phi_i^a}{\hat{H}}{\Phi_j^b}
+=&\frac{1}{2}\sum_{\alpha\beta}\mel{\alpha}{\hat{h}_0}{\beta}\mel{c}{a_j^{\dagger}a_ba_{\alpha}^{\dagger}a_{\beta}a_a^{\dagger}a_i}{c}\\
++&\frac{1}{4}\sum_{\alpha\beta\gamma\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}\mel{c}{a_j^{\dagger}a_ba_{\alpha}^{\dagger}a_{\beta}^{\dagger}a_{\delta}a_{\gamma}a_a^{\dagger}a_i}{c}\notag
+\end{align}
+
+\begin{align}
+\mel{c}{a_j^{\dagger}a_ba_{\alpha}^{\dagger}a_{\beta}a_a^{\dagger}a_i}{c}
+&=\delta_{ij}\delta_{ab}\delta_{\alpha\beta}+\delta_{ij}\delta_{a\alpha}\delta_{\beta b}-\delta_{i\beta}\delta_{ab}\delta_{\alpha j}\\
+\mel{c}{a_j^{\dagger}a_ba_{\alpha}^{\dagger}a_{\beta}^{\dagger}a_{\delta}a_{\gamma}a_a^{\dagger}a_i}{c}
+&=\delta_{i\delta}\delta_{a\beta}\delta_{\alpha j}\delta_{\gamma b}-\delta_{i\delta}\delta_{a\alpha}\delta_{\beta j}\delta_{\gamma b}\notag\\
+&+\delta_{i\delta}\delta_{ab}\delta_{\alpha j}\delta_{\beta\gamma}-\delta_{i\delta}\delta_{ab}\delta_{\alpha j}\delta_{\beta\gamma}\notag\\
+&+\delta_{i\gamma}\delta_{a\alpha}\delta_{\beta j}\delta_{\delta b}-\delta_{i\gamma}\delta_{a\beta}\delta_{\alpha j}\delta_{\delta b}\notag\\
+&+\delta_{i\gamma}\delta_{ab}\delta_{\alpha \delta}\delta_{\beta j} -\delta_{i\gamma}\delta_{ab}\delta_{\alpha j}\delta_{\beta\delta}\\
+&+\delta_{ij}\delta_{a\alpha}\delta_{\beta \delta}\delta_{\gamma b} -\delta_{ij}\delta_{a\alpha}\delta_{\beta \gamma}\delta_{\delta b}\notag\\
+&+\delta_{ij}\delta_{a\beta}\delta_{\alpha \gamma}\delta_{\delta b} -\delta_{ij}\delta_{a\beta}\delta_{\alpha \delta}\delta_{\gamma b}\notag\\
+&+\delta_{ij}\delta_{ab}\delta_{\alpha \gamma}\delta_{\beta\delta} -\delta_{ij}\delta_{ab}\delta_{\alpha \delta}\delta_{\beta\gamma}\notag
+\end{align}
+
+We observe that all two-body terms are antisymmetric. When using that the matrix elements are symmetric, we obtain
+
+\begin{align}
+\mel{\Phi_i^a}{\hat{H}}{\Phi_j^b}=\mel{aj}{\hat{v}}{ib}_{\text{AS}}&-\delta_{ab}\Big[\mel{i}{\hat{h}_0}{j}+\sum_k\mel{ik}{\hat{v}}{jk}_{\text{AS}}\Big]\notag\\
+&+\delta_{ij}\Big[\mel{a}{\hat{h}_0}{b}+\sum_k\mel{ak}{\hat{v}}{bk}_{\text{AS}}\Big]\\
+&+\delta_{ab}\delta_{ij}\Big[\sum_k\mel{k}{\hat{h}_0}{k}+\frac{1}{2}\sum_{kl}\mel{kl}{\hat{v}}{kl}_{\text{AS}}\Big]\notag
+\label{eq:ia_H_jb}
+\end{align}

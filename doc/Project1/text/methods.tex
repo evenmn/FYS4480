@@ -23,7 +23,7 @@ The Hamiltonian can be rewritten as a double sum over all states using the so-ca
 \hat{H}=\sum_{ij}\ket{\Phi_i}\mel{\Phi_i}{\hat{H}}{\Phi_j}\bra{\Phi_j}
 \end{equation}
 such that the Schr\"odinger equation can be rewritten as
-\begin{equation*}
+\begin{equation}
 \begin{pmatrix}
 \mel{\Phi_0}{\hat{H}}{\Phi_0} & \mel{\Phi_0}{\hat{H}}{\Phi_1} & \hdots & \mel{\Phi_0}{\hat{H}}{\Phi_{N-1}}\\
 \mel{\Phi_1}{\hat{H}}{\Phi_0} & \mel{\Phi_1}{\hat{H}}{\Phi_1} & \hdots & \mel{\Phi_1}{\hat{H}}{\Phi_{N-1}}\\
@@ -37,7 +37,8 @@ c_0^{(p)}\\ c_1^{(p)} \\ \vdots\\ c_{N-1}^{(p)}
 \begin{pmatrix}
 c_0^{(p)}\\ c_1^{(p)} \\ \vdots\\ c_{N-1}^{(p)}
 \end{pmatrix}
-\end{equation*}
+\label{eq:CIS_matrix}
+\end{equation}
 
 Until now, we have not made any assumptions, such that the equation above will give exact results when all SPFs are included. The problem is that the matrix scales so badly, the number of Slater Determinant that we need to include goes as 
 \begin{equation}
@@ -62,12 +63,10 @@ class CIS:
     OBT = 0
     for i in range(self.n):
       OBT += self.elem.OBME(i,i)
-
     TBT = 0
     for i in range(self.n):
       for j in range(self.n):
         TBT += 0.5*self.elem.AS(i,j,i,j)
-
     return OBT + TBT
 
 
@@ -75,11 +74,9 @@ class CIS:
     '''Singly excited ket'''
 
     OBT = self.elem.OBME(i,a)
-
     TBT = 0
     for j in range(self.n):
       TBT += self.elem.AS(a,j,i,j)
-
     return OBT + TBT
 
 
@@ -87,23 +84,19 @@ class CIS:
     '''Singly excited bra and ket'''
 
     Result = self.elem.AS(a,j,i,b)
-
     if a==b:
     Result -= self.elem.OBME(i,j)
     for k in range(self.n):
       Result -= self.elem.AS(i,k,j,k)
-
       if i==j:
         for l in range(self.n):
           Result += self.elem.OBME(l,l)
           for m in range(self.n):
             Result += 0.5*self.elem.AS(l,m,l,m)
-
     if i==j:
       Result += self.elem.OBME(a,b)
       for k in range(self.n):
         Result += self.elem.AS(a,k,b,k)
-
     return Result
 \end{lstlisting}
 
@@ -162,7 +155,9 @@ We recognize that \eqref{eq:HF_sum} can be written as a matrix-vector product
 where $C_k$ are columns in our coefficient matrix and $\varepsilon_k^{\text{HF}}$ are just the eigenvalues of $\hat{h}^{\text{HF}}$, they have no physical significance. We will use this equation to find the optimal SPFs (optimal $C_k$'s) and then find the energy from equation \eqref{eq:E_hf}.
 \begin{equation}
 \hat{h}^{\text{HF}}(C_k^{i+1})C_k^i=\varepsilon_k^{\text{HF}}C_k^i
+\label{eq:HF_iter}
 \end{equation}
+Usually one initialize this with $\hat{C}=\hat{{\cal I}}$, the identity matrix.
 
 The implementation could look something like this
 \lstset{basicstyle=\scriptsize}

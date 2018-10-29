@@ -51,8 +51,10 @@ A[4,4] = Beryllium.ia_H_jb(3,5,3,5)
 
 eigvals, eigvecs = np.linalg.eigh(A)
 
+print(A)
+
 print('Ref. Energy: ', A[0,0])
 print('Energy CIS:  ', eigvals[0])
 
 # === Hartree Fock ===
-print('Energy HF:   ', Beryllium_HF.HF_iter()[0],' in ', Beryllium_HF.HF_iter()[1], ' iterations')
+#print('Energy HF:   ', Beryllium_HF.HF_iter()[0],' in ', Beryllium_HF.HF_iter()[1], ' iterations')

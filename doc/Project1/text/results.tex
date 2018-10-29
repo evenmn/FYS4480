@@ -1,26 +1,29 @@
 \section{Results} \label{sec:results}
+In this project, the results are mainly er energies, where we will present the obtained reference energy, the CIS energy, HF energy after 1 iteration and HF energy after it has converged. We will compare with recent experimental energies, and for Helium we will also compare to what Hylleraas obtained in 1929. 
 
+Furthermore, we will show how the matrices look like, which can be useful to know in some contexts. 
 
 \subsection{The Helium atom}
-I will start presenting my main results: the ground state energies, and then 
+Let's start with the Helium atom. The ground state energies are presented in the first subsection, and after that we present the HF matrices and the CIS matrix respectively. 
 
 \subsubsection{Ground state energies}
+The obtained ground state energies are given in table \eqref{tab:gs_he}.
 \begin{table} [H]
-	\caption{}
+	\caption{Ground state energies of the Helium atom and the relative error with respect to the experimental value. The experimental value is taken from [Bergerson, 1998], and Hylleraas' energy is taken from [http://www.umich.edu/~chem461/QMChap8.pdf]. Further the reference value is obtained from equation \eqref{eq:c_H_c}, the CIS calculation is based on equation \eqref{eq:CIS_matrix} and the two last energies are obtained from equation \eqref{eq:HF_iter} with the identity matrix as initial $\hat{C}$, and the energy converged after 10 iterations with a maximum change of 1e-8.}
 	\begin{tabularx}{\textwidth}{X|X|X} \hline\hline
 		\textbf{Method}&\textbf{Energy} [a.u.]&\textbf{Relative error}\\ \hline
-		Experimental & -2.903694\footnote{Bergerson, 1998} & 0.00\%  \\
+		Experimental & -2.903694 & 0.00\%  \\
 		Hylleraas & -2.90363 & 0.0022\% \\
 		Reference & -2.750000 & 5.29\% \\
 		CIS & -2.838648 &  2.24\% \\
 		HF$_{\text{1 iteration}}$ & -2.829193 & 2.56\% \\
 		HF$_{\text{converge}}$ & -2.831096 & 2.50\% \\ \hline\hline
 	\end{tabularx}
+	\label{tab:gs_he}
 \end{table}
 
 \subsubsection{CIS}
-Set up matrix and eigenvectors
-
+The CIS matrix reads
 \begin{equation}
 \hat{H}_{\text{CIS}}=
 \begin{pmatrix}
@@ -32,12 +35,12 @@ Set up matrix and eigenvectors
 \end{pmatrix}
 \label{eq:H_He}
 \end{equation}
+where the SPF order of choice is $\ket{\Phi_0}, \ket{\Phi_1^2}, \ket{\Phi_{\bar{1}}^{\bar{2}}}, \ket{\Phi_1^3}, \ket{\Phi_{\bar{1}}^{\bar{3}}}$.
 
 \subsubsection{HF}
-Set up matrix and eigenvectors after first iteration (basically when inserting C=I). 
-Hartree-Fock matrix after one iteration (basically after inserting the identity matrix as the coefficients)
-\begin{equation}
-\hat{h}^{\text{HF}}=
+Below you can find the HF matrices. The first matrix is the one obtained after an iteration, while the last is after the energy has converged. We have initialized with the identity matrix in both cases. 
+\begin{align}
+\hat{h}_{\text{1 iter}}^{\text{HF}}=
 \begin{pmatrix}
 -0.750 & 0.000 & 0.179 & 0.000 & 0.088 & 0.000\\
 0.000 & -0.750 & 0.000 & 0.179 & 0.000 & 0.088\\
@@ -45,12 +48,8 @@ Hartree-Fock matrix after one iteration (basically after inserting the identity 
 0.000 & 0.179 & 0.000 & 0.296 & 0.000 & 0.180\\
 0.088 & 0.000 & 0.180 & 0.000 & 0.164 & 0.000\\
 0.000 & 0.088 & 0.000 & 0.180 & 0.000 & 0.164
-\end{pmatrix}
-\label{eq:h_HF_He_1iter}
-\end{equation}
-After the energy has converged, we find this matrix:
-\begin{equation}
-\hat{h}^{\text{HF}}=
+\end{pmatrix}\label{eq:h_HF_He_1iter}\\
+\hat{h}_{\text{converge}}^{\text{HF}}=
 \begin{pmatrix}
 -0.840 & 0.000 & 0.226 & 0.000 & 0.102 & 0.000\\
 0.000 & -0.840 & 0.000 & 0.226 & 0.000 & 0.102\\
@@ -60,30 +59,66 @@ After the energy has converged, we find this matrix:
 0.000 & 0.102 & 0.000 & 0.169 & 0.000 & 0.159
 \end{pmatrix}
 \label{eq:h_HF_He_converge}
-\end{equation}
+\end{align}
 Observe that they are not very different. Unlike the zeros in matrix \eqref{eq:h_HF_He_1iter}, the zeros in \eqref{eq:h_HF_He_converge} are not exactly zero, but smaller than 1e-17. 
-
+\newpage
 \subsection{The Beryllium atom}
+We now turn to the Beryllium atom. The ground state energies are presented in the first subsection, and after that we present the HF matrices and the CIS matrix respectively. 
 
+\subsubsection{Ground state energy}
 \begin{table} [H]
-	\caption{}
+	\caption{Ground state energies of the Beryllium atom and the relative error with respect to the experimental value. The experimental value is taken from [Kramida, Martin, 1997] and the reference value is obtained from equation \eqref{eq:c_H_c}, the CIS calculation is based on equation \eqref{eq:CIS_matrix} and the two last energies are obtained from equation \eqref{eq:HF_iter} with the identity matrix as initial $\hat{C}$, and the energy converged after 11 iterations with a maximum change of 1e-8.}
 	\begin{tabularx}{\textwidth}{X|X|X} \hline\hline
 		\textbf{Method}&\textbf{Energy} [a.u.]&\textbf{Relative error}\\ \hline
-		Experimental & -14.6674\footnote{Kramida, Martin, 1997} & 0.00\%  \\
+		Experimental & -14.6674 & 0.00\%  \\
 		Reference & -13.7160 & 6.49\% \\
 		CIS & -14.3621 &  2.08\% \\
-		HF & -14.5083 & 1.08\% \\ \hline\hline
+		HF$_{\text{1 iteration}}$ &  -14.4998 & 1.14\% \\
+		HF$_{\text{converge}}$ & -14.5083 & 1.08\% \\ \hline\hline
 	\end{tabularx}
+	\label{tab:gs_be}
 \end{table}
 
-\iffalse
-\begin{figure} [H]%
-	\centering
-	\subfloat[Lambda vs. R2-score]{{\includegraphics[width=7cm]{../plots/lambda_R2score.png} }}%
-	\subfloat[Variance vs. R2-score]{{\includegraphics[width=7cm]{../plots/var_R2score.png} }}
-	\caption{R$^2$-score plotted as a function of the penalty $\lambda$ (a) and as a function of the noise (b). $\lambda\in[10^{-8},10^2]$ in (a) and $\sigma^2\in[10^{-6},10^{-0.7}]$ in (b). The other parameters used were $\lambda=1e-5$ (penalty, was held constant for (b) only), $\eta=1e-4$ (learning rate), $niter=1e5$ (number of iterations) and $\mathcal{N}(0, \sigma^2=0.1)$ (noise, was held constant for (a) only).}%
-	\label{fig:R2_scores}
-\end{figure}
-\fi 
+\subsubsection{CIS}
+The CIS matrix reads
+
+\begin{equation}
+\hat{H}_{\text{CIS}}=
+\begin{pmatrix}
+-2.372 & 0.189 & 0.189 & 0.445 & 0.445\\
+0.189 & -9.655 & 2.307 & -0.390 & 0.001\\
+0.189 & 0.023 & -9.655 & 0.001 & -0.393\\
+0.445 & -0.393 & 0.001 & -13.688 & 0.030\\
+0.445 & 0.001 & -0.393 & 0.030 & -13.688
+\end{pmatrix}
+\label{eq:H_Be}
+\end{equation}
+where the SPF order of choice is $\ket{\Phi_0}, \ket{\Phi_1^3}, \ket{\Phi_{\bar{1}}^{\bar{3}}}, \ket{\Phi_2^3}, \ket{\Phi_{\bar{2}}^{\bar{3}}}$.
+
+\subsubsection{HF}
+Below you can find the HF matrices. The first matrix is the one obtained after an iteration, while the last is after the energy has converged. We have initialized with the identity matrix in both cases. 
+
+\begin{align}
+\hat{h}_{\text{1 iter}}^{\text{HF}}=
+\begin{pmatrix}
+-3.909 & 0.000 & 0.392 & 0.000 & 0.189 & 0.000\\
+0.000 & -3.909 & 0.000 & 0.392 & 0.000 & 0.189\\
+0.392 & 0.000 & 0.193 & 0.000 & 0.445 & 0.000\\
+0.000 & 0.392 & 0.000 & 0.193 & 0.000 & 0.445\\
+0.189 & 0.000 & 0.445 & 0.000 & 0.527 & 0.000\\
+0.000 & 0.189 & 0.000 & 0.445 & 0.000 & 0.527
+\end{pmatrix}\label{eq:h_HF_Be_1iter}\\
+\hat{h}_{\text{converge}}^{\text{HF}}=
+\begin{pmatrix}
+-4.650 & 0.000 & 0.392 & 0.000 & 0.199 & 0.000\\
+0.000 & -4.650 & 0.000 & 0.392 & 0.000 & 0.199\\
+0.392 & 0.000 & 0.116 & 0.000 & 0.534 & 0.000\\
+0.000 & 0.392 & 0.000 & 0.116 & 0.000 & 0.534\\
+0.199 & 0.000 & 0.534 & 0.000 & 0.353 & 0.000\\
+0.000 & 0.199 & 0.000 & 0.534 & 0.000 & 0.353
+\end{pmatrix}
+\label{eq:h_HF_Be_converge}
+\end{align}
+Observe that they are not very different. Unlike the zeros in matrix \eqref{eq:h_HF_Be_1iter}, the zeros in \eqref{eq:h_HF_Be_converge} are not exactly zero, but smaller than 1e-17. 
 
 
