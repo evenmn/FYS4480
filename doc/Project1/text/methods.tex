@@ -22,11 +22,90 @@ The Hamiltonian can be rewritten as a double sum over all states using the so-ca
 \begin{equation}
 \hat{H}=\sum_{ij}\ket{\Phi_i}\mel{\Phi_i}{\hat{H}}{\Phi_j}\bra{\Phi_j}
 \end{equation}
-such that
+such that the Schr\"odinger equation can be rewritten as
+\begin{equation*}
+\begin{pmatrix}
+\mel{\Phi_0}{\hat{H}}{\Phi_0} & \mel{\Phi_0}{\hat{H}}{\Phi_1} & \hdots & \mel{\Phi_0}{\hat{H}}{\Phi_{N-1}}\\
+\mel{\Phi_1}{\hat{H}}{\Phi_0} & \mel{\Phi_1}{\hat{H}}{\Phi_1} & \hdots & \mel{\Phi_1}{\hat{H}}{\Phi_{N-1}}\\
+\vdots & \vdots & \ddots & \vdots\\
+\mel{\Phi_{N-1}}{\hat{H}}{\Phi_0} & \mel{\Phi_{N-1}}{\hat{H}}{\Phi_1} & \hdots & \mel{\Phi_{N-1}}{\hat{H}}{\Phi_{N-1}}\\
+\end{pmatrix}
+\begin{pmatrix}
+c_0^{(p)}\\ c_1^{(p)} \\ \vdots\\ c_{N-1}^{(p)}
+\end{pmatrix}
+=\varepsilon_p
+\begin{pmatrix}
+c_0^{(p)}\\ c_1^{(p)} \\ \vdots\\ c_{N-1}^{(p)}
+\end{pmatrix}
+\end{equation*}
 
-Here we need to show how to go from Schrodinger to the Hamilton matrix. Show some general implementations.
+Until now, we have not made any assumptions, such that the equation above will give exact results when all SPFs are included. The problem is that the matrix scales so badly, the number of Slater Determinant that we need to include goes as 
+\begin{equation}
+N_{\text{FCI}}=\binom{N_{\text{single orbitals}}}{N_{\text{electrons}}}
+\end{equation}
+which is exploding. This is quite annoying since we in principle know how to solve the problems exact. However, in this project we restrict ourselves to three orbitals and single excitations only, which makes the problem more manageable. [https://github.com/ManyBodyPhysics/FYS4480/blob/master/doc/Exercises/Answers/FirstsetAnswer.pdf]The matrices are given in results, and a program calculating solutions to equation (\ref{eq:c_H_c}-\ref{eq:ia_H_jb}) is outlined below
 
-Add implementation
+\lstset{basicstyle=\scriptsize}
+\begin{lstlisting}
+class CIS:
+  '''Configuration Interction Singles class for atomic structure'''
+
+  def __init__(self, Z, basis):
+
+    self.elem = Integrals(Z,basis)  # Matrix elements/integrals
+    self.n = Z                      # Assume neutral atom
+
+
+  def c_H_c(self):
+    '''Reference energy'''
+
+    OBT = 0
+    for i in range(self.n):
+      OBT += self.elem.OBME(i,i)
+
+    TBT = 0
+    for i in range(self.n):
+      for j in range(self.n):
+        TBT += 0.5*self.elem.AS(i,j,i,j)
+
+    return OBT + TBT
+
+
+  def c_H_ia(self, i,a):
+    '''Singly excited ket'''
+
+    OBT = self.elem.OBME(i,a)
+
+    TBT = 0
+    for j in range(self.n):
+      TBT += self.elem.AS(a,j,i,j)
+
+    return OBT + TBT
+
+
+  def ia_H_jb(self, i,a,j,b):
+    '''Singly excited bra and ket'''
+
+    Result = self.elem.AS(a,j,i,b)
+
+    if a==b:
+    Result -= self.elem.OBME(i,j)
+    for k in range(self.n):
+      Result -= self.elem.AS(i,k,j,k)
+
+      if i==j:
+        for l in range(self.n):
+          Result += self.elem.OBME(l,l)
+          for m in range(self.n):
+            Result += 0.5*self.elem.AS(l,m,l,m)
+
+    if i==j:
+      Result += self.elem.OBME(a,b)
+      for k in range(self.n):
+        Result += self.elem.AS(a,k,b,k)
+
+    return Result
+\end{lstlisting}
 
 \subsection{Hartree-Fock}
 When we calculated the reference energy above, our basis contained only one Slater determinant, more specifically the ground state. In Hartree-Fock, we still have a single Slater determinant basis, but we now construct new SPFs with the constraint of minimizing the energy. 
@@ -35,7 +114,7 @@ In general, one can change from one single-particle basis to another by a unitar
 \begin{equation}
 \ket{p}=\sum_{\alpha}c_{p\alpha}\ket{\alpha},
 \end{equation}
-where we use greek letters for the old basis and roman letters for the new one. If we then insert into \eqref{eq:E_ref}, we get a find energy formula with coefficients, $C_{p\lambda}$, that we can vary
+where we use greek letters for the old basis and roman letters for the new one. If we then insert into \eqref{eq:c_H_c}, we get a find energy formula with coefficients, $C_{p\lambda}$, that we can vary
 \begin{equation}
 E=\sum_{p}^N\sum_{\alpha\beta}C_{p\alpha}^*C_{p\beta}\mel{\alpha}{\hat{h}_0}{\beta}+\frac{1}{2}
 \sum_{pq}^N\sum_{\alpha\beta\gamma\delta}C_{p\alpha}^*C_{q\beta}^*C_{p\gamma}C_{q\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}_{\text{AS}}.
@@ -89,76 +168,63 @@ The implementation could look something like this
 \lstset{basicstyle=\scriptsize}
 \begin{lstlisting}
 class HF:
-'''Hartree-Fock class for atomic structure'''
+  '''Hartree-Fock class for atomic structure'''
 
-def __init__(self, Z, basis):
-'''
-Arguments:
-----------
-Z:      Int.
-Atomic number (proton number)
-'''
+  def __init__(self, Z, basis):
 
-self.elem = Integrals(Z,basis)  # Matrix elements/integrals
-self.n = Z                      # Number of electrons, assuming neutral atom
-self.N = len(basis)             # Number of states
+    self.elem = Integrals(Z,basis)  # Matrix elements/integrals
+    self.n = Z                      # Number of electrons, assuming neutral atom
+    self.N = len(basis)             # Number of states
 
 
-def HF_elements(self,i,j,C):
-'''HF matrix elements (i,j)'''
+  def HF_elements(self,i,j,C):
+    '''HF matrix elements (i,j)'''
 
-Result = self.elem.OBME(i, j)
-
-for p in range(self.n):
-for c in range(self.N):
-for d in range(self.N):
-Result += C[p,c]*C[p,d]*self.elem.AS(i,c,j,d)
-
-return Result
+    Result = self.elem.OBME(i, j)
+    for p in range(self.n):
+      for c in range(self.N):
+        for d in range(self.N):
+          Result += C[p,c]*C[p,d]*self.elem.AS(i,c,j,d)
+    return Result
 
 
-def HF_matrix(self,C):
-'''HF-matrix'''
+  def HF_matrix(self,C):
+    '''HF-matrix'''
 
-HF_mat = np.empty((self.N,self.N))
-
-for i in range(self.N):
-for j in range(self.N):
-HF_mat[i,j] = HF.HF_elements(self,i,j,C)
-
-return HF_mat
+    HF_mat = np.empty((self.N,self.N))
+    for i in range(self.N):
+      for j in range(self.N):
+        HF_mat[i,j] = HF.HF_elements(self,i,j,C)
+    return HF_mat
 
 
-def HF_iter(self,tol=1e-8,max_iter=50):
-'''Solving HF with an iterative scheme'''
+  def HF_iter(self,tol=1e-8,max_iter=50):
+    '''Solving HF with an iterative scheme'''
 
-C = np.eye(self.N)
-eps = np.ones(self.N)
+    C = np.eye(self.N)
+    eps = np.ones(self.N)
+    for i in range(max_iter):
+      HF_mat = HF.HF_matrix(self,C)
+      eps_new, C = np.linalg.eigh(HF_mat)
+      C = C.T
 
-for i in range(max_iter):
-HF_mat = HF.HF_matrix(self,C)
-eps_new, C = np.linalg.eigh(HF_mat)
-C = C.T
-
-if abs(eps[0]-eps_new[0]) < tol:
-break
-eps = eps_new
-
-return HF.calc_E(self,C), i
+      if abs(eps[0]-eps_new[0]) < tol:
+        break
+        eps = eps_new
+    return HF.calc_E(self,C), i
 
 
-def calc_E(self,C):
-'''Calculate energy'''
+  def calc_E(self,C):
+    '''Calculate energy'''
 
-E = 0
-for p in range(self.n):
-for a in range(self.N):
-for b in range(self.N):
-E += C[p,a]*C[p,b]*self.elem.OBME(a,b)
-for q in range(self.n):
-for c in range(self.N):
-for d in range(self.N):
-E += 0.5*C[p,a]*C[q,b]*C[p,c]*C[q,d]*self.elem.AS(a,b,c,d)
-
-return E
+    E = 0
+    for p in range(self.n):
+      for a in range(self.N):
+        for b in range(self.N):
+          E += C[p,a]*C[p,b]*self.elem.OBME(a,b)
+          for q in range(self.n):
+            for c in range(self.N):
+              for d in range(self.N):
+                E += 0.5*C[p,a]*C[q,b]*C[p,c]*C[q,d]*self.elem.AS(a,b,c,d)
+    return E
 \end{lstlisting}

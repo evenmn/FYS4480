@@ -95,13 +95,13 @@ Wick's theorem is extremely useful when calculating expectation values in second
 
 Immediately, it does not seem to simplify the sequence, the clue lies in the normalizing. When calculating expectation values, we will always have an equal number of creation and annihilation operators between the vacuum states (otherwise the expectation value is zero). This means that a normal ordering will always contain an annihilation operator, which is located to the right, acts on the vacuum state and everything goes to zero. In other words, the only terms that contribute in an expectation value calculation are the fully contracted terms, which gives a major simplification. 
 
-The theorem can also be generalized, taking operators of multiple creation and annihilation operators into account. If those operators are normal ordered, Wick's theorem states that only external contractions will contribute, i.e, no contractions inward the operators. 
+The theorem can also be generalized, taking operators of multiple creation and annihilation operators into account. If those operators are normal ordered, Wick's theorem states that only external contractions will contribute, i.e, no contractions inward the operators. [https://manybodyphysics.github.io/FYS4480/doc/pub/secondquant/html/secondquant-bs.html]
 
 \subsubsection{Energy formulas}
 We are now ready to calculate some expectation values based on the theory above. We will later do Configuration Interaction Singles (CIS) only, so it is sufficient to calculate $\mel{\Phi_0}{\hat{H}}{\Phi_0}$, $\mel{\Phi_0}{\hat{H}}{\Phi_i^a}$ and $\mel{\Phi_i^a}{\hat{H}}{\Phi_j^b}$. The calculations are moved to Appendix A in order to maintain some sort of neatness. We obtain that the reference energy as a function
 of $Z$ is
 \begin{align}
-	\varepsilon_0=\mel{\Phi_0}{\hat{H}}{\Phi_0}&=\sum_i\mel{i}{\hat{h}_0}{i}+\frac{1}{2}\sum_{ij}\mel{ij}{\hat{v}}{ij}_{\text{AS}}\label{eq:E_ref}
+	\varepsilon_0=\mel{\Phi_0}{\hat{H}}{\Phi_0}&=\sum_i\mel{i}{\hat{h}_0}{i}+\frac{1}{2}\sum_{ij}\mel{ij}{\hat{v}}{ij}_{\text{AS}}\label{eq:c_H_c}
 \end{align}
 where the subscript AS indicates an antisymmetric elements,
 \begin{equation}
@@ -110,12 +110,14 @@ where the subscript AS indicates an antisymmetric elements,
 Further, we obtained
 \begin{equation}
 \mel{\Phi_0}{\hat{H}}{\Phi_i^a}=\mel{i}{\hat{h}_0}{a}+\sum_j\mel{aj}{\hat{v}}{ij}_{\text{AS}}
+\label{eq:c_H_ia}
 \end{equation}
 and
 \begin{align}
 	\mel{\Phi_i^a}{\hat{H}}{\Phi_j^b}=\mel{aj}{\hat{v}}{ib}_{\text{AS}}&-\delta_{ab}\Big[\mel{i}{\hat{h}_0}{j}+\sum_k\mel{ik}{\hat{v}}{jk}_{\text{AS}}\Big]\notag\\
 	&+\delta_{ij}\Big[\mel{a}{\hat{h}_0}{b}+\sum_k\mel{ak}{\hat{v}}{bk}_{\text{AS}}\Big]\\
 	&+\delta_{ab}\delta_{ij}\Big[\sum_k\mel{k}{\hat{h}_0}{k}+\frac{1}{2}\sum_{kl}\mel{kl}{\hat{v}}{kl}_{\text{AS}}\Big]\notag
+	\label{eq:ia_H_jb}
 \end{align}
 where the two latter are functions of $Z$ as well. They are then general.
 

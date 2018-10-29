@@ -54,10 +54,10 @@ class CIS:
                 Result -= self.elem.AS(i,k,j,k)
                     
             if i==j:
-                for k in range(self.n):
-                    Result += self.elem.OBME(k,k)
-                    for l in range(self.n):
-                        Result += 0.5*self.elem.AS(k,l,k,l)
+                for l in range(self.n):
+                    Result += self.elem.OBME(l,l)
+                    for m in range(self.n):
+                        Result += 0.5*self.elem.AS(l,m,l,m)
                                 
         if i==j:
             Result += self.elem.OBME(a,b)
