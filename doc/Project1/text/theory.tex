@@ -63,7 +63,7 @@ If we now look at a sequence of creation and annihilation operators, shuffling t
 \begin{align}
 	\{a_p^{\dagger},a_q^{\dagger}\}&\equiv a_p^{\dagger}a_q^{\dagger}-a_p^{\dagger}a_q^{\dagger}=0\\
 	\{a_p,a_q\}&\equiv a_pa_q-a_pa_q=0\\
-	\{a_p^{\dagger},a_q\}&\equiv a_p^{\dagger}a_q+a_pa_q^{\dagger}=\delta_{pq}.
+	\{a_p^{\dagger},a_q\}&\equiv a_p^{\dagger}a_q-a_pa_q^{\dagger}=\delta_{pq}.
 \end{align}
 With a sequence of operators acting on a vacuum state, we can use this to determine expectation values by moving annihilation operators against the vacuum. However, this is really tedious when we have many operators, and fortunately we have Wick's theorem to simplify these operations. More about that in section \eqref{sec:wick}.
 
@@ -95,7 +95,7 @@ Wick's theorem is extremely useful when calculating expectation values in second
 
 Immediately, it does not seem to simplify the sequence, the clue lies in the normalizing. When calculating expectation values, we will always have an equal number of creation and annihilation operators between the vacuum states (otherwise the expectation value is zero). This means that a normal ordering will always contain an annihilation operator, which is located to the right, acts on the vacuum state and everything goes to zero. In other words, the only terms that contribute in an expectation value calculation are the fully contracted terms, which gives a major simplification. 
 
-The theorem can also be generalized, taking operators of multiple creation and annihilation operators into account. If those operators are normal ordered, Wick's theorem states that only external contractions will contribute, i.e, no contractions inward the operators. [https://manybodyphysics.github.io/FYS4480/doc/pub/secondquant/html/secondquant-bs.html]
+The theorem can also be generalized, taking operators of multiple creation and annihilation operators into account. If those operators are normal ordered, Wick's theorem states that only external contractions will contribute, i.e, no contractions inward the operators. [3]
 
 \subsubsection{Energy formulas}
 We are now ready to calculate some expectation values based on the theory above. We will later do Configuration Interaction Singles (CIS) only, so it is sufficient to calculate $\mel{\Phi_0}{\hat{H}}{\Phi_0}$, $\mel{\Phi_0}{\hat{H}}{\Phi_i^a}$ and $\mel{\Phi_i^a}{\hat{H}}{\Phi_j^b}$. The calculations are moved to Appendix A in order to maintain some sort of neatness. We obtain that the reference energy as a function
@@ -124,7 +124,7 @@ where the two latter are functions of $Z$ as well. They are then general.
 \subsection{The Helium atom}
 A neutral Helium atom consists of a nucleus of two protons with two electrons orbiting, and is the simplest many-body atom one can study (atoms with more than 1 electron). The difficulty of dealing with many-body systems lies in the interaction, where the elements $\mel{\alpha\beta}{\hat{v}}{\gamma\delta}$ can be really tricky to handle. The interaction term makes the exact wave function almost impossible to find.
 
-There exist various methods for solving this problem, where one of the most successful is to define a wave function which is varied such that the energy is minimized. This method was used by E. Hylleraas already in 1929, when he minimized the energy with a wave function of 10 variational parameters, using a mechanical desk calculator. [https://www.encyclopedia.com/science/dictionaries-thesauruses-pictures-and-press-releases/hylleraas-egil-andersen] He found the energy to be -2.90363 eV, which is close to recent experimental values, and which we will compare our energies to.  [http://www.umich.edu/~chem461/QMChap8.pdf][https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.80.3475]. 
+There exist various methods for solving this problem, where one of the most successful is to define a wave function which is varied such that the energy is minimized. This method was used by E. Hylleraas already in 1929, when he minimized the energy with a wave function of 10 variational parameters, using a mechanical desk calculator. [1] He found the energy to be -2.90363 eV, which is close to recent experimental values, and which we will compare our energies to. [2] 
 
 \subsubsection{Ground state}
 Helium is in its ground state when both electrons occupy the 1s orbital, thus they have opposite spins and $M_s=0$. In this project, we will study systems of $M_s=0$ only, such that an electron can only be excited to a state with the same spin. 
