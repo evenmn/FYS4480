@@ -18,7 +18,7 @@ The Hamiltonian thus reads
 \begin{equation}
 \hat{H}=\hat{H}_0 + \hat{H}_I=\sum_{i=1}^N\hat{h}_0(x_i)+\sum_{i<j}^N\frac{1}{r_{ij}}
 \end{equation}
-with $r_{ij}\equiv\frac{1}{|\boldsymbol{r}_i-\boldsymbol{r}_j|}$ and $\hat{h}_0$ as the one-body operator for each electron. The single particle functions (SPF) are assumed to be hydrogen-like, where the one-body energies are known from the Bohr model, stating
+with $r_{ij}\equiv|\boldsymbol{r}_i-\boldsymbol{r}_j|$ and $\hat{h}_0$ as the one-body operator for each electron. The single particle functions (SPF) are assumed to be hydrogen-like, where the one-body energies are known from the Bohr model, stating
 \begin{equation}
 E_n=-\frac{Z^2}{2n^2}
 \end{equation}
@@ -34,7 +34,7 @@ where the Dirac notation is used for shorthand notation. Note carefully that the
 \end{align}
 We observe that the integral is non-zero if and only if $\alpha$ and $\gamma$ got the same spin, and $\beta$ and $\delta$ got the same spin.
 
-\subsection{Second Quantization}
+\subsection{Second Quantization} \label{sec:SQ}
 For quick and compact calculations, we use second quantization as our formalism. The idea is to introduce creation and annihilation operators, which working on a Slater Determinant (SD) can create or annihilate a particle. A creation operator acting on a SD containing zero particles (called a vacuum state), will result in a SD containing one particle, and an annihilation operator acting on a SD containing zero particles will just give zero,
 \begin{align}
 	a_{p}^{\dagger}\ket{0}&=\ket{p}\\
@@ -51,7 +51,7 @@ where $a_p^{\dagger}$ is the creation operator and $a_p$ is the annihilation ope
 \equiv \ket{1,2,\hdots,N}
 \end{equation}
 
-Further, the Slater Determinant can only contain one particle in the same state at the same time (ref. Pauli principle), such that adding a particle that already exists in the SD should automatically give zero. In the same manner, removing a particle that does not exist should also give zero. The operations that contribute are when adding a particle that does not exist and removing a particle that exists:
+Further, the SD can only contain one particle in the same state at the same time (ref. Pauli principle), such that adding a particle that already exists in the SD should automatically give zero. In the same manner, removing a particle that does not exist should also give zero. The operations that contribute are when adding a particle that does not exist and removing a particle that exists:
 \begin{align}
 	&a_{a}^{\dagger}\ket{abc\hdots xyz}=0\\
 	&a_{a}\ket{bc\hdots xyz}=0\\
@@ -77,7 +77,7 @@ while the interaction part is given by
 \end{equation}
 
 \subsubsection{Particle-hole formalism}
-For large system, it is not very tempting to write out the entire Slater Determinant as operators acting on the vacuum state. If we assume that the Slater is orthonormal onto itself, $\braket{SD}{SD}=1$, we can redefine our vacuum containing all states in the $\ket{SD}$. This is often called the Fermi vacuum. When annihilating a particle below the Fermi level (one of the particles in the Fermi vacuum), we say that we create a hole. When replacing the hole with a particle, we say that we annihilate the hole. Similarly above the Fermi level, we can create and annihilate particles. The annihilation operator therefore now works as before above the Fermi level, but below the Fermi level the creation operator works as the annihilation operator before, and vice versa. In that manner, we specify whether the quasiparticle is a hole or a particle by giving holes indices $i,j,k,l,\hdots$ and particles indices $a,b,c,d,\hdots$. $p,q,r,s,\hdots$ are without restrictions. This leads to
+For large system, it is not very tempting to write out the entire SD as operators acting on the vacuum state. If we assume that the SD is orthonormal onto itself, $\braket{SD}{SD}=1$, we can redefine our vacuum containing all states in the $\ket{SD}$. This is often called the Fermi vacuum. When annihilating a particle below the Fermi level (one of the particles in the Fermi vacuum), we say that we create a hole. When replacing the hole with a particle, we say that we annihilate the hole. Similarly above the Fermi level, we can create and annihilate particles. The annihilation operator therefore now works as before above the Fermi level, but below the Fermi level the creation operator works as the annihilation operator before, and vice versa. In that manner, we specify whether the quasiparticle is a hole or a particle by giving holes indices $i,j,k,l,\hdots$ and particles indices $a,b,c,d,\hdots$. $p,q,r,s,\hdots$ are without restrictions. This leads to
 \begin{align}
 	\{a_a^{\dagger},a_b\}&=\delta_{ab}\\
 	\{a_i,a_j^{\dagger}\}&=\delta_{ij}
@@ -103,7 +103,7 @@ of $Z$ is
 \begin{align}
 	\varepsilon_0=\mel{\Phi_0}{\hat{H}}{\Phi_0}&=\sum_i\mel{i}{\hat{h}_0}{i}+\frac{1}{2}\sum_{ij}\mel{ij}{\hat{v}}{ij}_{\text{AS}}\label{eq:c_H_c}
 \end{align}
-where the subscript AS indicates an antisymmetric elements,
+where the subscript AS indicates an antisymmetric element,
 \begin{equation}
 \mel{ij}{\hat{v}}{ij}_{\text{AS}}=\mel{ij}{\hat{v}}{ij}-\mel{ij}{\hat{v}}{ji}.
 \end{equation}
@@ -119,7 +119,7 @@ and
 	&+\delta_{ab}\delta_{ij}\Big[\sum_k\mel{k}{\hat{h}_0}{k}+\frac{1}{2}\sum_{kl}\mel{kl}{\hat{v}}{kl}_{\text{AS}}\Big]\notag
 	\label{eq:ia_H_jb}
 \end{align}
-where the two latter are functions of $Z$ as well. They are then general.
+where the two latter are functions of $Z$ as well. They are then valid for all atoms.
 
 \subsection{The Helium atom}
 A neutral Helium atom consists of a nucleus of two protons with two electrons orbiting, and is the simplest many-body atom one can study (atoms with more than 1 electron). The difficulty of dealing with many-body systems lies in the interaction, where the elements $\mel{\alpha\beta}{\hat{v}}{\gamma\delta}$ can be really tricky to handle. The interaction term makes the exact wave function almost impossible to find.
@@ -129,7 +129,7 @@ There exist various methods for solving this problem, where one of the most succ
 \subsubsection{Ground state}
 Helium is in its ground state when both electrons occupy the 1s orbital, thus they have opposite spins and $M_s=0$. In this project, we will study systems of $M_s=0$ only, such that an electron can only be excited to a state with the same spin. 
 
-Taking the Pauli principle into account, the two-body wavefunction needs to be nulled out if two particles are in the same state, and it should also be antisymmetric under exchange of two particles. We are therefore in need of a Slater Determinant, given by
+Taking the Pauli principle into account, the two-body wavefunction needs to be nulled out if two particles are in the same state, and it should also be antisymmetric under exchange of two particles. We are therefore in need of a SD, defined in the same way as in section \ref{sec:SQ},
 \begin{align}
 	\Psi(x_1,x_2,\sigma_1,\sigma_2)&=A\mqty|\psi_{\sigma_1}(x_1) & \psi_{\sigma_1}(x_2)\\ \psi_{\sigma_2}(x_1) & \psi_{\sigma_2}(x_2)|\\
 	&=A\Big[\psi_{\sigma_1}(x_1)\psi_{\sigma_2}(x_2)-\psi_{\sigma_2}(x_1)\psi_{\sigma_1}(x_2)\Big]

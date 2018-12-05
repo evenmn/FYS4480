@@ -44,7 +44,7 @@ Until now, we have not made any assumptions, such that the equation above will g
 \begin{equation}
 N_{\text{FCI}}=\binom{N_{\text{single orbitals}}}{N_{\text{electrons}}}
 \end{equation}
-which is exploding. This is quite annoying since we in principle know how to solve the problems exact. However, in this project we restrict ourselves to three orbitals and single excitations only, which makes the problem more manageable. [4] The matrices are given in results, and a program calculating solutions to equation (\ref{eq:c_H_c}-\ref{eq:ia_H_jb}) is outlined below
+which is exploding. This is quite annoying since we have an exact solution to the problem. However, in this project we restrict ourselves to three orbitals and single excitations only, which makes the problem more manageable. [4] The matrices are given in results, and a program calculating solutions to equation (\ref{eq:c_H_c}-\ref{eq:ia_H_jb}) is outlined below
 
 \lstset{basicstyle=\scriptsize}
 \begin{lstlisting}
@@ -85,14 +85,14 @@ class CIS:
 
     Result = self.elem.AS(a,j,i,b)
     if a==b:
-    Result -= self.elem.OBME(i,j)
-    for k in range(self.n):
-      Result -= self.elem.AS(i,k,j,k)
-      if i==j:
-        for l in range(self.n):
-          Result += self.elem.OBME(l,l)
-          for m in range(self.n):
-            Result += 0.5*self.elem.AS(l,m,l,m)
+      Result -= self.elem.OBME(i,j)
+      for k in range(self.n):
+        Result -= self.elem.AS(i,k,j,k)
+        if i==j:
+          for l in range(self.n):
+            Result += self.elem.OBME(l,l)
+            for m in range(self.n):
+              Result += 0.5*self.elem.AS(l,m,l,m)
     if i==j:
       Result += self.elem.OBME(a,b)
       for k in range(self.n):
@@ -101,13 +101,13 @@ class CIS:
 \end{lstlisting}
 
 \subsection{Hartree-Fock}
-When we calculated the reference energy above, our basis contained only one Slater determinant, more specifically the ground state. In Hartree-Fock, we still have a single Slater determinant basis, but we now construct new SPFs with the constraint of minimizing the energy. 
+When we calculated the reference energy above, our basis contained only one SD, more specifically the ground state. In Hartree-Fock, we still have a single SD basis, but we now construct new SPFs with the constraint of minimizing the energy. 
 
-In general, one can change from one single-particle basis to another by a unitary transform,
+In general, one can go from one single-particle basis to another by a unitary transform,
 \begin{equation}
 \ket{p}=\sum_{\alpha}c_{p\alpha}\ket{\alpha},
 \end{equation}
-where we use greek letters for the old basis and roman letters for the new one. If we then insert into \eqref{eq:c_H_c}, we get a find energy formula with coefficients, $C_{p\lambda}$, that we can vary
+where we use greek letters for the old basis and roman letters for the new one. If we then insert into \eqref{eq:c_H_c}, we get an energy formula with coefficients, $C_{p\lambda}$, that we can vary
 \begin{equation}
 E=\sum_{p}^N\sum_{\alpha\beta}C_{p\alpha}^*C_{p\beta}\mel{\alpha}{\hat{h}_0}{\beta}+\frac{1}{2}
 \sum_{pq}^N\sum_{\alpha\beta\gamma\delta}C_{p\alpha}^*C_{q\beta}^*C_{p\gamma}C_{q\delta}\mel{\alpha\beta}{\hat{v}}{\gamma\delta}_{\text{AS}}.
@@ -122,7 +122,7 @@ We now have a function, $E$, that we want to minimize with respect to a constrai
 \begin{equation}
 {\cal L}(\{C_{p\alpha}\})=E(\{C_{p\alpha}\})-\sum_a\varepsilon_a\Big(\sum_{\alpha}c_{p\alpha}^*c_{q\alpha}-\delta_{pq}\Big).
 \end{equation}
-The variation in reference energy is then find to be
+The variation in reference energy is then found to be
 \begin{equation}
 \delta E=\sum_{k\alpha}\frac{\partial E}{\partial C_{k\alpha}^*}\delta C_{k\alpha}^*+\sum_{k\alpha}\frac{\partial E}{\partial C_{k\alpha}}\delta C_{k\alpha}-\sum_{k\alpha}\varepsilon_k(C_{k\alpha}\delta C_{k\alpha}^*+C_{k\alpha}^*\delta C_{k\alpha})
 \label{eq:E_hf}
@@ -133,7 +133,7 @@ which is zero when $E$ is minimized. Each coefficient $C_{k\alpha}$ and $C_{k\al
 \end{equation}
 which is satisfied if and only if
 \begin{equation}
-\frac{\partial E}{\partial C_{k\alpha}^*}-\varepsilon_kC_{k\alpha}=0\qquad\forall\,\,\, k,\alpha
+\frac{\partial E}{\partial C_{k\alpha}^*}-\varepsilon_kC_{k\alpha}=0\qquad\forall\,\,\, k,\alpha.
 \end{equation}
 The first term can be derived from \eqref{eq:E_hf}, and reads
 \begin{equation}
@@ -152,12 +152,12 @@ We recognize that \eqref{eq:HF_sum} can be written as a matrix-vector product
 \begin{equation}
 \hat{h}^{\text{HF}}C_k=\varepsilon_k^{\text{HF}}C_k
 \end{equation}
-where $C_k$ are columns in our coefficient matrix and $\varepsilon_k^{\text{HF}}$ are just the eigenvalues of $\hat{h}^{\text{HF}}$, they have no physical significance. We will use this equation to find the optimal SPFs (optimal $C_k$'s) and then find the energy from equation \eqref{eq:E_hf}.
+where $C_k$ are columns in our coefficient matrix and $\varepsilon_k^{\text{HF}}$ are just the eigenvalues of $\hat{h}^{\text{HF}}$, they have no physical significance. We will use this equation to find the optimal SPFs (optimal $C_k$'s) and then find the energy from equation \eqref{eq:E_hf}. Recursively, we can write
 \begin{equation}
-\hat{h}^{\text{HF}}(C_k^{i+1})C_k^i=\varepsilon_k^{\text{HF}}C_k^i
+\hat{h}^{\text{HF}}(C_k^{i+1})C_k^i=\varepsilon_k^{\text{HF}}C_k^i,
 \label{eq:HF_iter}
 \end{equation}
-Usually one initialize this with $\hat{C}=\hat{{\cal I}}$, the identity matrix.
+which is usually initialized with the identity matrix, $\hat{C}=\hat{{\cal I}}$.
 
 The implementation could look something like this
 \lstset{basicstyle=\scriptsize}
@@ -194,7 +194,7 @@ class HF:
 
 
   def HF_iter(self,tol=1e-8,max_iter=50):
-    '''Solving HF with an iterative scheme'''
+    '''Solving HF in an iterative scheme'''
 
     C = np.eye(self.N)
     eps = np.ones(self.N)
