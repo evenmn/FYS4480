@@ -1,0 +1,144 @@
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale=1.1]
+		\begin{scope}[decoration={markings,mark=at position 0.45 with {\arrow[scale=2,>=stealth]{>}}}]
+		
+		\node[] at (-3.5,-0.5) {$\mel{\phiijab}{\hat{H}_I\hatTt^2}{c}=$};
+		
+		% DIAGRAM A
+		
+		% Hamiltonian
+		% Draw vertex line
+		\draw (0,0) [dashed] -- (1.5,0);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (0,0) -- (-0.5,-1);
+		\draw [postaction={decorate}] (1.5,0) -- (0,-1);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (1.5,-1) -- (0,0);
+		\draw [postaction={decorate}] (2,-1) -- (1.5,0);
+		
+		
+		% Left T2
+		% Draw vertex line
+		\draw (0,-1) -- (-0.5,-1);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (0,-1) -- (-0.75,0.5) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (-0.5,-1) -- (-1.25,0.5) node[midway, left] (b){b};
+		
+		
+		% Right T2
+		% Draw vertex line
+		\draw (1.5,-1) -- (2,-1);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (2.25,0.5) -- (1.5,-1) node[midway, right] (i){i};
+		\draw [postaction={decorate}] (2.75,0.5) -- (2,-1) node[midway, right] (j){j};
+		
+		\node[] at (3.25,-0.5) {$+$};
+        % DIAGRAM B
+        \def\i{5.5}
+        % Hamiltonian
+		% Draw vertex lines
+		\draw (\i,0) [dashed] -- (1+\i,0);
+		\draw (\i,-1) -- (-1+\i,-1);
+		\draw (1+\i,-1) -- (2+\i,-1);
+		
+		% Draw internal loops
+		\draw [postaction={decorate}] (0+\i,-1) [in=-35, out=35] to (0+\i,0);
+		\draw [postaction={decorate}] (0+\i,0) [in=145, out=-145] to (0+\i,-1);
+		\draw [postaction={decorate}] (1+\i,-1) [in=-35, out=35] to (1+\i,0);
+		\draw [postaction={decorate}] (1+\i,0) [in=145, out=-145] to (1+\i,-1);
+		
+		% Draw left lines
+		\draw [postaction={decorate}] (-1+\i,-1) -- (-1.75+\i,0.5) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (-0.25+\i,0.5) -- (-1+\i,-1) node[midway, right] (i){i};
+		
+		% Draw right lines
+		\draw [postaction={decorate}] (2+\i,-1) -- (1.25+\i,0.5) node[midway, left] (b){b};
+		\draw [postaction={decorate}] (2.75+\i,0.5) -- (2+\i,-1) node[midway, right] (j){j};
+        
+        \node[] at (-2.25,-2.5) {$+$};
+        % DIAGRAM C
+        \def\ic{0.5}
+        \def\jc{-2}
+        % Hamiltonian
+		% Draw vertex lines
+		\draw (0.5+\ic,0+\jc) [dashed] -- (-1+\ic,0+\jc);
+		\draw (0+\ic,-1+\jc) -- (-1+\ic,-1+\jc);
+		\draw (1+\ic,-1+\jc) -- (1.5+\ic,-1+\jc);
+		
+		% Draw internal loop
+		\draw [postaction={decorate}] (-1+\ic,-1+\jc) [in=-35, out=35] to (-1+\ic,0+\jc);
+		\draw [postaction={decorate}] (-1+\ic,0+\jc) [in=145, out=-145] to (-1+\ic,-1+\jc);
+		
+		% Draw left lines
+		\draw [postaction={decorate}] (0+\ic,-1+\jc) -- (-0.75+\ic,0.5+\jc) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (0.5+\ic,0+\jc) -- (0+\ic,-1+\jc);
+		
+		% Draw right lines
+		\draw [postaction={decorate}] (1.5+\ic,-1+\jc) -- (0.75+\ic,0.5+\jc) node[midway, left] (b){b};
+		\draw [postaction={decorate}] (2.25+\ic,0.5+\jc) -- (1.5+\ic,-1+\jc) node[midway, right] (j){j};
+		
+		\draw [postaction={decorate}] (1+\ic,-1+\jc) -- (0.5+\ic,0+\jc);
+		\draw [postaction={decorate}] (1.75+\ic,0.5+\jc) -- (1+\ic,-1+\jc
+		) node[midway, right] (i){i};
+        
+        \node[] at (3.25,-2.5) {$+$};
+        % DIAGRAM D
+        \def\id{5.5}
+        \def\jd{-2}
+        % Hamiltonian
+		% Draw vertex lines
+		\draw (0.5+\id,0+\jd) [dashed] -- (-1+\id,0+\jd);
+		\draw (0+\id,-1+\jd) -- (-1+\id,-1+\jd);
+		\draw (1+\id,-1+\jd) -- (1.5+\id,-1+\jd);
+		
+		% Draw internal loop
+		\draw [postaction={decorate}] (-1+\id,0+\jd) [in=35, out=-35] to (-1+\id,-1+\jd);
+		\draw [postaction={decorate}] (-1+\id,-1+\jd) [in=-145, out=145] to (-1+\id,0+\jd);
+		
+		% Draw left lines
+		\draw [postaction={decorate}] (-0.75+\id,0.5+\jd) -- (0+\id,-1+\jd) node[midway, left] (i){i};
+		\draw [postaction={decorate}] (0+\id,-1+\jd) -- (0.5+\id,0+\jd);
+		
+		% Draw right lines
+		\draw [postaction={decorate}] (0.75+\id,0.5+\jd) -- (1.5+\id,-1+\jd) node[midway, left] (j){j};
+		\draw [postaction={decorate}] (1.5+\id,-1+\jd) -- (2.25+\id,0.5+\jd) node[midway, right] (b){b};
+		
+		\draw [postaction={decorate}] (0.5+\id,0+\jd) -- (1+\id,-1+\jd);
+		\draw [postaction={decorate}] (1+\id,-1+\jd) -- (1.75+\id,0.5+\jd) node[midway, right] (a){a};
+		
+		\node[] at (-2.25,-4.5) {$+$};
+		% DIAGRAM E
+		\def\ie{0.5}
+		\def\je{-4}
+		% Hamiltonian
+		% Draw vertex lines
+		\draw (0+\ie,0+\je) [dashed] -- (-1+\ie,0+\je);
+		\draw (0+\ie,-1+\je) -- (-1+\ie,-1+\je);
+		\draw (1+\ie,-1+\je) -- (2+\ie,-1+\je);
+		
+		% Draw internal loop
+		\draw [postaction={decorate}] (-1+\ie,0+\je) [in=35, out=-35] to (-1+\ie,-1+\je);
+		\draw [postaction={decorate}] (-1+\ie,-1+\je) [in=-145, out=145] to (-1+\ie,0+\je);
+		\draw [postaction={decorate}] (0+\ie,0+\je) [in=35, out=-35] to (0+\ie,-1+\je);
+		\draw [postaction={decorate}] (0+\ie,-1+\je) [in=-145, out=145] to (0+\ie,0+\je);
+		
+		
+		% Draw right lines
+		\draw [postaction={decorate}] (1.25+\ie,0.5+\je) -- (2+\ie,-1+\je) node[midway,right] (j){j};
+		\draw [postaction={decorate}] (2+\ie,-1+\je) -- (2.75+\ie,0.5+\je) node[midway, left] (b){b};
+		
+		\draw [postaction={decorate}] (0.25+\ie,0.5+\je) -- (1+\ie,-1+\je) node[midway,right] (i){i};
+		\draw [postaction={decorate}] (1+\ie,-1+\je) -- (1.75+\ie,0.5+\je) node[midway, left] (a){a};
+		
+		\end{scope}
+		
+		\end{tikzpicture}
+	\end{center}
+	%\caption{Ground state of Helium.}
+	\label{fig:a_dig}
+\end{figure}

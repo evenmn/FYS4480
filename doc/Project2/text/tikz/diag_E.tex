@@ -1,0 +1,35 @@
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale=1.3]
+		\begin{scope}[decoration={markings,mark=at position 0.6 with {\arrow[scale=2,>=stealth]{>}}}]
+		
+		% Hamiltonian
+		% Draw vertex lines
+		\draw (0,0) -- (-1,0);
+		\draw (0,-1) -- (-1,-1);
+		\draw (1,-1) -- (2,-1);
+		
+		% Draw internal loop
+		\draw [postaction={decorate}] (-1,0) [in=35, out=-35] to (-1,-1);
+		\draw [postaction={decorate}] (-1,-1) [in=-145, out=145] to (-1,0);
+		\draw [postaction={decorate}] (0,0) [in=35, out=-35] to (0,-1);
+		\draw [postaction={decorate}] (0,-1) [in=-145, out=145] to (0,0);
+		
+		
+		% Draw right lines
+		\draw [postaction={decorate}] (1.25,0.5) -- (2,-1) node[midway,right] (j){j};
+		\draw [postaction={decorate}] (2,-1) -- (2.75,0.5) node[midway, left] (b){b};
+		
+		\draw [postaction={decorate}] (0.25,0.5) -- (1,-1) node[midway,right] (i){i};
+		\draw [postaction={decorate}] (1,-1) -- (1.75,0.5) node[midway, left] (a){a};
+		
+		
+		% Draw vertex point
+		%\filldraw (1,0) circle (0.05cm);
+		\end{scope}
+		
+		\end{tikzpicture}
+	\end{center}
+	%\caption{Ground state of Helium.}
+	\label{fig:e_dig}
+\end{figure}

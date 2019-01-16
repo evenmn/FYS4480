@@ -1,0 +1,25 @@
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale=1]
+		\begin{scope}[decoration={markings,mark=at position 0.6 with {\arrow[scale=2,>=stealth]{>}}}]
+		
+		% Hamiltonian
+		% Draw vertex line
+		\draw (0,0) [dashed] -- (2.5,0);
+		\filldraw (2.5,0) circle (0.05cm);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (0.5,-1) -- (0,0);
+		\draw [postaction={decorate}] (2,-1) -- (1.5,0);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (0,0) -- (-0.5,-1);
+		\draw [postaction={decorate}] (1.5,0) -- (1,-1);
+		
+		\end{scope}
+		
+		\end{tikzpicture}
+	\end{center}
+	%\caption{Ground state of Helium.}
+	\label{fig:H_I}
+\end{figure}

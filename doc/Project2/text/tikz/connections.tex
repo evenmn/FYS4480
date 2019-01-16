@@ -1,0 +1,256 @@
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+		\begin{scope}[decoration={markings,mark=at position 0.6 with {\arrow[scale=2,>=stealth]{>}}}]
+		
+		\node[] at (-4.5,-1.5) {$\mel{\phiijab}{\hat{H}_I\hatTt^2}{c}=$};
+		
+		% DIAGRAM A
+		
+		% Hamiltonian
+		% Draw vertex line
+		\draw (0,0) [dashed] -- (1.5,0);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (0.5,-1) -- (0,0);
+		\draw [postaction={decorate}] (2,-1) -- (1.5,0);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (0,0) -- (-0.5,-1);
+		\draw [postaction={decorate}] (1.5,0) -- (1,-1);
+		
+		
+		% Draw connection lines
+		\draw (0.5,-1) [dotted] -- (1,-2);
+		\draw (1,-1) [dotted] -- (0.5,-2);
+		\draw (-0.5,-1) [dotted] -- (-1,-2);
+		\draw (2,-1) [dotted] -- (2.5,-2);
+		
+		
+		% Left T2
+		% Draw vertex line
+		\draw (0,-3) -- (-1.5,-3);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (-1,-2) -- (-1.5,-3);
+		\draw [postaction={decorate}] (0.5,-2) -- (0,-3);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (-1.5,-3) -- (-2,-2) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (0,-3) -- (-0.5,-2) node[midway, left] (b){b};
+		
+		
+		% Right T2
+		% Draw vertex line
+		\draw (3,-3) -- (1.5,-3);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (2,-2) -- (1.5,-3) node[midway, right] (i){i};
+		\draw [postaction={decorate}] (3.5,-2) -- (3,-3) node[midway, right] (j){j};
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (1.5,-3) -- (1,-2);
+		\draw [postaction={decorate}] (3,-3) -- (2.5,-2);
+		
+		
+		% Draw vertex point
+		%\filldraw (1,0) circle (0.05cm);
+		
+		
+		
+		\node[] at (4,-1.5) {$+$};
+		% DIAGRAM B
+		
+		% Hamiltonian
+		% Draw vertex line
+		\draw (6.5,0) [dashed] -- (8,0);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (6,-1) -- (6.5,0);
+		\draw [postaction={decorate}] (7.5,-1) -- (8,0);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (6.5,0) -- (7,-1);
+		\draw [postaction={decorate}] (8,0) -- (8.5,-1);
+		
+		
+		% Draw connection lines
+		\draw (7,-1) [dotted] -- (7,-2);
+		\draw (7.5,-1) [dotted] -- (7.5,-2);
+		\draw (6,-1) [dotted] -- (6,-2);
+		\draw (8.5,-1) [dotted] -- (8.5,-2);
+		
+		
+		% Left T2
+		% Draw vertex line
+		\draw (6.5,-3) -- (5,-3);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (5.5,-2) -- (5,-3) node[midway, right] (i){i};
+		\draw [postaction={decorate}] (7,-2) -- (6.5,-3);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (5,-3) -- (4.5,-2) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (6.5,-3) -- (6,-2);
+		
+		
+		% Right T2
+		% Draw vertex line
+		\draw (9.5,-3) -- (8,-3);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (8.5,-2) -- (8,-3);
+		\draw [postaction={decorate}] (10,-2) -- (9.5,-3) node[midway, right] (j){j};
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (8,-3) -- (7.5,-2);
+		\draw [postaction={decorate}] (9.5,-3) -- (9,-2) node[midway, left] (b){b};
+		
+		\node[] at (-3,-5.5) {$+$};
+		% DIAGRAM C
+		
+		% Hamiltonian
+		% Draw vertex line
+		\draw (0,-4) [dashed] -- (1.5,-4);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (-0.5,-5) -- (0,-4);
+		\draw [postaction={decorate}] (1,-5) -- (1.5,-4);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (0,-4) -- (0.5,-5);
+		\draw [postaction={decorate}] (1.5,-4) -- (2,-5);
+		
+		
+		% Draw connection lines
+		\draw (-0.5,-5) [dotted] -- (-2,-6);
+		\draw (0.5,-5) [dotted] -- (-1,-6);
+		\draw (2,-5) [dotted] -- (0.5,-6);
+		\draw (1,-5) [dotted] -- (1,-6);
+		
+		
+		% Left T2
+		% Draw vertex line
+		\draw (0,-7) -- (-1.5,-7);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (-1,-6) -- (-1.5,-7);
+		\draw [postaction={decorate}] (0.5,-6) -- (0,-7);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (-1.5,-7) -- (-2,-6);
+		\draw [postaction={decorate}] (0,-7) -- (-0.5,-6) node[midway, left] (a){a};
+		
+		
+		% Right T2
+		% Draw vertex line
+		\draw (3,-7) -- (1.5,-7);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (2,-6) -- (1.5,-7) node[midway, right] (i){i};
+		\draw [postaction={decorate}] (3.5,-6) -- (3,-7) node[midway, right] (j){j};
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (1.5,-7) -- (1,-6);
+		\draw [postaction={decorate}] (3,-7) -- (2.5,-6) node[midway, left] (b){b};
+		
+		\node[] at (4,-5.5) {$+$};
+		% DIAGRAM D
+		
+		% Hamiltonian
+		% Draw vertex line
+		\draw (6.5,-4) [dashed] -- (8,-4);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (6,-5) -- (6.5,-4);
+		\draw [postaction={decorate}] (7.5,-5) -- (8,-4);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (6.5,-4) -- (7,-5);
+		\draw [postaction={decorate}] (8,-4) -- (8.5,-5);
+		
+		
+		% Draw connection lines
+		\draw (6,-5) [dotted] -- (4.5,-6);
+		\draw (7,-5) [dotted] -- (5.5,-6);
+		\draw (7.5,-5) [dotted] -- (6,-6);
+		\draw (8.5,-5) [dotted] -- (8.5,-6);
+		
+		
+		% Left T2
+		% Draw vertex line
+		\draw (6.5,-7) -- (5,-7);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (5.5,-6) -- (5,-7);
+		\draw [postaction={decorate}] (7,-6) -- (6.5,-7) node[midway, right] (i){i};
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (5,-7) -- (4.5,-6);
+		\draw [postaction={decorate}] (6.5,-7) -- (6,-6);
+		
+		
+		% Right T2
+		% Draw vertex line
+		\draw (9.5,-7) -- (8,-7);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (8.5,-6) -- (8,-7);
+		\draw [postaction={decorate}] (10,-6) -- (9.5,-7) node[midway, right] (j){j};
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (8,-7) -- (7.5,-6) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (9.5,-7) -- (9,-6) node[midway, left] (b){b};
+		
+		\node[] at (-3,-9.5) {$+$};
+		% DIAGRAM E
+		
+		% Hamiltonian
+		% Draw vertex line
+		\draw (0,-8) [dashed] -- (1.5,-8);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (-0.5,-9) -- (0,-8);
+		\draw [postaction={decorate}] (1,-9) -- (1.5,-8);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (0,-8) -- (0.5,-9);
+		\draw [postaction={decorate}] (1.5,-8) -- (2,-9);
+		
+		
+		% Draw connection lines
+		\draw (-0.5,-9) [dotted] -- (-2,-10);
+		\draw (0.5,-9) [dotted] -- (-1,-10);
+		\draw (1,-9) [dotted] -- (-0.5,-10);
+		\draw (2,-9) [dotted] -- (0.5,-10);
+		
+		
+		% Left T2
+		% Draw vertex line
+		\draw (0,-11) -- (-1.5,-11);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (-1,-10) -- (-1.5,-11);
+		\draw [postaction={decorate}] (0.5,-10) -- (0,-11);
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (-1.5,-11) -- (-2,-10);
+		\draw [postaction={decorate}] (0,-11) -- (-0.5,-10);
+		
+		
+		% Right T2
+		% Draw vertex line
+		\draw (3,-11) -- (1.5,-11);
+		
+		% Draw incoming lines
+		\draw [postaction={decorate}] (2,-10) -- (1.5,-11) node[midway, right] (i){i};
+		\draw [postaction={decorate}] (3.5,-10) -- (3,-11) node[midway, right] (j){j};
+		
+		% Draw outgoing lines
+		\draw [postaction={decorate}] (1.5,-11) -- (1,-10) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (3,-11) -- (2.5,-10) node[midway, left] (b){b};
+		
+		\end{scope}
+		\end{tikzpicture}
+	\end{center}
+\end{figure}

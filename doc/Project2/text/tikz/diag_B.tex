@@ -1,0 +1,34 @@
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale=1]
+		\begin{scope}[decoration={markings,mark=at position 0.45 with {\arrow[scale=2,>=stealth]{>}}}]
+		
+		% Hamiltonian
+		% Draw vertex lines
+		\draw (0,0) [dashed] -- (1.5,0);
+		\draw (0,-1) -- (-1,-1);
+		\draw (1.5,-1) -- (2.5,-1);
+		
+		% Draw internal loops
+		\draw [postaction={decorate}] (0,-1) [in=-35, out=35] to (0,0);
+		\draw [postaction={decorate}] (0,0) [in=145, out=-145] to (0,-1);
+		\draw [postaction={decorate}] (1.5,-1) [in=-35, out=35] to (1.5,0);
+		\draw [postaction={decorate}] (1.5,0) [in=145, out=-145] to (1.5,-1);
+		
+		% Draw left lines
+		\draw [postaction={decorate}] (-1,-1) -- (-1.75,0.5) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (-0.25,0.5) -- (-1,-1) node[midway, right] (i){i};
+		
+		% Draw right lines
+		\draw [postaction={decorate}] (2.5,-1) -- (1.75,0.5) node[midway, left] (b){b};
+		\draw [postaction={decorate}] (3.25,0.5) -- (2.5,-1) node[midway, right] (j){j};
+		
+		
+		\node[] at (6.5,-0.5) {$=\Phat{ab}\sum_{klcd}t_{ik}^{ac}t_{lj}^{db}\brak{kl}{cd}$};
+		\end{scope}
+		
+		\end{tikzpicture}
+	\end{center}
+	%\caption{Ground state of Helium.}
+	\label{fig:b_dig}
+\end{figure}

@@ -1,0 +1,95 @@
+\section{Calculations of amplitude equations}
+The calculations of the amplitude equations are quite messy...
+
+The first amplitude term, $\mel{\phiijab}{\hat{F}\hatTt}{c}$, will be carefully calculated using Wick's generalized theorem and symmetry arguments. Thereafter we will turn to the other terms and skip the contraction lines. 
+\begin{align}
+    \mel{\phiijab}{\hat{F}\hatTt}{c}&=\frac{1}{4}\sum_{pq}\sum_{cdkl}f_q^pt_{kl}^{cd}\mel{c}{\{\ad_i\ad_ja_ba_a\}\{\ad_pa_q\}\{\ad_c \ad_da_la_k\}}{c}\\
+    &
+    \begin{aligned}
+    &=\frac{1}{4}\sum_{pq}\sum_{cdkl}f_q^pt_{kl}^{cd}\Phat{ij}\Phat{ab}\Phat{cd}\mel{c}{\wick{\c5 \ad_i \c4 \ad_j \c3 a_b \c1 a_a\c1 \ad_p \c2 a_q\c2 \ad_c \c3 \ad_d \c4 a_l \c5 a_k}}{c}\\
+    &\phantom{=}+\frac{1}{4}\sum_{pq}\sum_{cdkl}f_q^pt_{kl}^{cd}\Phat{ij}\Phat{ab}\Phat{lk}\mel{c}{\wick{\c5 \ad_i \c1 \ad_j \c4 a_b \c3 a_a \c2 \ad_p \c1 a_q \c3 \ad_c \c4 \ad_d \c2 a_l \c5 a_k}}{c}
+    \end{aligned}\\
+    &
+    \begin{aligned}
+    \phantom{}=\frac{1}{4}\sum_{pq}\sum_{cdkl}f_q^pt_{kl}^{cd}\Phat{ij}\Phat{ab}\Big[&\del{ik}\del{jl}\del{bd}\del{ap}\del{qc}-\del{ik}\del{jl}\del{bc}\del{ap}\del{qd}\\
+    -&\del{ik}\del{jq}\del{bd}\del{ac}\del{pl}+\del{il}\del{jq}\del{bd}\del{ac}\del{pk}\Big]
+    \end{aligned}\\
+    &
+    \begin{aligned}
+    &=\frac{1}{4}\sum_cf_c^at_{ij}^{cb}\Phat{ij}\Phat{ab}-\frac{1}{4}\sum_df_d^at_{ij}^{bd}\Phat{ij}\Phat{ab}\\
+    &\phantom{=}-\frac{1}{4}\sum_lf_j^lt_{il}^{ab}\Phat{ij}\Phat{ab}+\frac{1}{4}\sum_kf_j^kt_{ki}^{ab}\Phat{ij}\Phat{ab}
+    \end{aligned}\\
+    &=\frac{1}{2}\sum_cf_c^at_{ij}^{cb}\Phat{ij}\Phat{ab}-\frac{1}{2}\sum_kf_j^kt_{ik}^{ab}\Phat{ij}\Phat{ab}\\
+    &=\sum_kf_i^kt_{jk}^{ab}\Phat{ij}-\sum_cf_c^at_{ij}^{bc}\Phat{ab}
+\end{align}
+
+\begin{align}
+    \mel{\phiijab}{\hat{H}_I\hatTt}{c}&=\frac{1}{16}\sum_{pqrs}\sum_{cdkl}t_{kl}^{cd}\brak{pq}{rs}\mel{c}{\{\ad_i\ad_ja_ba_a\}\{\ad_p\ad_qa_sa_r\}\{\ad_c\ad_da_la_k\}}{c}\\
+    &
+    \begin{aligned}
+    =\frac{1}{16}\sum_{pqrs}\sum_{cdkl}t_{kl}^{cd}\brak{pq}{rs}\Big[&\Phat{ij}\Phat{ab}\Phat{pq}\del{ir}\del{js}\del{bd}\del{ac}\del{pk}\del{ql}\\
+    +&\Phat{ij}\Phat{ab}\Phat{rs}\del{ik}\del{jl}\del{bq}\del{ap}\del{sd}\del{rc}\\
+    -&\Phat{ij}\Phat{ab}\Phat{pq}\Phat{sr}\Phat{cd}\Phat{lk}\del{ik}\del{js}\del{bd}\del{ap}\del{ql}\del{rc}\Big]
+    \end{aligned}\\
+    &
+    \begin{aligned}
+    &=\frac{1}{16}\Phat{ij}\Phat{ab}\Big[\sum_{cd}t_{ij}^{cd}\big(\brak{ab}{cd}-\brak{ab}{dc}\big)\Big]\\
+    &\phantom{=}+\frac{1}{16}\Phat{ij}\Phat{ab}\Big[\sum_{kl}t_{kl}^{ab}\big(\brak{kl}{ij}-\brak{lk}{ij}\big)\Big]\\
+    &
+    \begin{aligned}
+    \phantom{=}-\frac{1}{16}\Phat{ij}\Phat{ab}\Big[&\sum_{lc}t_{il}^{cb}\brak{al}{cj}-\sum_{kc}t_{ki}^{cb}\brak{ak}{cj}\\
+    -&\sum_{ld}t_{il}^{bd}\brak{al}{dj}+\sum_{kd}t_{ki}^{bd}\brak{ak}{dj}\\
+    -&\sum_{lc}t_{il}^{cb}\brak{al}{jc}+\sum_{kc}t_{ki}^{cb}\brak{ak}{jc}\\
+    +&\sum_{ld}t_{il}^{bd}\brak{al}{jd}-\sum_{kd}t_{ki}^{bd}\brak{ak}{jd}\\
+    +&\sum_{lc}t_{il}^{cb}\brak{la}{jc}-\sum_{kc}t_{ki}^{cb}\brak{ka}{jc}\\
+    -&\sum_{ld}t_{il}^{bd}\brak{la}{jd}+\sum_{kd}t_{ki}^{bd}\brak{ka}{jd}\\
+    -&\sum_{lc}t_{il}^{cb}\brak{la}{cj}+\sum_{kc}t_{ki}^{cb}\brak{ka}{cj}\\
+    +&\sum_{ld}t_{il}^{bd}\brak{la}{dj}-\sum_{kd}t_{ki}^{bd}\brak{ka}{dj}\Big]
+    \end{aligned}
+    \end{aligned}\\
+    &=\frac{1}{2}\sum_{cd}\brak{ab}{cd}t_{ij}^{cd}+\frac{1}{2}\sum_{kl}\brak{kl}{ij}t_{kl}^{ab}+\Phat{ab}\Phat{ij}\sum_{kc}\brak{ak}{ic}t_{jk}^{bc}
+\end{align}
+
+The last term we need to calculate, is the following
+\begin{align}
+    \mel{\phiijab}{\hat{H}_I\hatTt^2}{c}&=\frac{1}{64}\sum_{pqrs}\sum_{cdkl}\sum_{efmn}t_{kl}^{cd}t_{mn}^{ef}\brak{pq}{rs}\mel{c}{\{\ad_i\ad_ja_ba_a\}\{\ad_p\ad_qa_sa_r\}\{\ad_c\ad_da_la_k\}\{\ad_e\ad_fa_na_m\}}{c}
+\end{align}
+which can be calculated in the same way as the previous terms. However, it is a tedious affair since there are hundreds of ways we can draw the contraction lines. Even though the permutation operators give some simplifications, it is not a tempting exercise to do. Instead, we turn to diagrammatic representation which is known to be more efficient. First, let us recall the operators
+\begin{align*}
+    \hat{T}_2 &= \frac{1}{4}\sum_{abij} t_{ij}^{ab}a^\dagger_a a^\dagger_b a_j a_i \\
+    \hat{H}_I &= \frac{1}{4}\sum_{pqrs} \brak{pq}{rs} \{a^\dagger_p a^\dagger_q a_s a_r \}.
+\end{align*}
+As we can see, $\hatTt$ creates two particles and annihilates two holes, and can by a diagram be represented as
+\input{tikz/T2_operator.tex}
+with the convention that particles point upwards and holes point downwards. Further, $\hat{H}_I$ is initially not restricted, i.e, the operators can either be particles or holes. 
+
+Nevertheless, the only term that do contribute, is when the operator annihilates two particles and creates two holes, corresponding to two particles lines into the vertex and two hole lines out from the vertex: 
+\input{tikz/HI_operator.tex}
+We will henceforth skip labeling of lines. The diagrams that represent the operator $\hat{H}_I\hatTt\hatTt$ is simply all unique connections between the operators with hole lines on hole lines and particle lines on particle lines. It turns out to be five unique connections,
+\input{tikz/connections.tex}
+which can be represented diagrammatically by
+\input{tikz/diagrams.tex}
+To convert the diagrams to ordinary equations, we need to introduce some diagrammatic rules. We will focus on the rules that we use for those specific diagrams, the reader should be aware that there exist more rules (for instance, we ignore all one-body rules).
+
+\begin{enumerate}
+    \item The sign is found from the rule $(-1)^{h-l}$ where $h$ is the total number of hole lines, and $l$ is the total number of loops (internal and external). External loops are loops that are made with a line going from $ijk\hdots$ to $abc\hdots$.
+    \item For each pair of lines which connect the two same vertices in the same direction, one needs to add a factor $1/2$.
+    \item For each pair of equivalent $\hat{T}_m$ vertices, one needs to add a factor $1/2$. Equivalent $\hat{T}_m$ vertices are vertices with the same number of line pairs that are connected to the interaction vertex in the same way. 
+    \item Any two-particle interaction vertex line is associated with an antisymmetric two-electron integral on the form $\langle\text{left-out, right-out}||\text{left-in, right-in}\rangle$
+    \item One should sum over all distinct permutations $\hat{P}$, i.e, permutations that give unique terms.
+    \item Disconnected terms (terms with operators that are neither directly nor indirectly connected) do always cancel with other terms, and can be ignored.
+\end{enumerate}
+
+For the first diagram, we have $h=4$ and $l=2$ due to two external lines, such that the term is positive. We have a pair of lines connecting the right-hand-side $\hatTt$-vertex to the interaction vertex, and a pair connecting the left-hand-side $\hatTt$-vertex to the interaction line. Since we do not have any equivalent $\hat{T}_m$ vertices nor distinct permutations, we end up with a prefactor $1/4$.
+\input{tikz/diag_A.tex}
+
+The second diagram has $h=4$ and $l=4$, such that the sign again is positive. This diagram has two equivalent $\hat{T}_m$ vertices (due to the symmetry), such that we get a factor $1/2$. We need to permute $\Phat{ab}$ and $\Phat{ij}$, but it turns out that they give the same terms such that we can choose which one to use and remove the factor in front. Using the same permutation operator as in the project description, the result is
+\input{tikz/diag_B.tex}
+
+Going further to the third term, we see that this term has one internal loop and two external, giving a negative sign. We have a pair of lines connecting the right-hand-side $\hatTt$-vertex to the interaction vertex in the same direction, giving a factor $1/2$. In addition we need to permute $a,b$ since they point from two different vertices, and we obtain
+\input{tikz/diag_C.tex}
+
+The understanding of the fourth diagram is similar to the third one, but now all the particle lines are replaced by hole lines and vice versa. We have one internal line and two external lines, giving a negative sign. The factor is again $1/2$, due to two lines going between the left-hand-side $\hatTt$-vertex and the interaction vertex in the same direction. Now $i$ and $j$ are connected to different vertices, such that we need to permute them. 
+\input{tikz/diag_D.tex}
+
+The final diagram is affected by the final rule, and cancel since it is both disconnected and unlinked. In fact, it cancel out the energy in the amplitude equations. \cite{shavitt}

@@ -1,0 +1,36 @@
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale=1]
+		\begin{scope}[decoration={markings,mark=at position 0.45 with {\arrow[scale=2,>=stealth]{>}}}]
+		
+		% Hamiltonian
+		% Draw vertex lines
+		\draw (0.5,0) [dashed] -- (-1,0);
+		\draw (0,-1) -- (-1,-1);
+		\draw (1,-1) -- (1.5,-1);
+		
+		% Draw internal loop
+		\draw [postaction={decorate}] (-1,-1) [in=-35, out=35] to (-1,0);
+		\draw [postaction={decorate}] (-1,0) [in=145, out=-145] to (-1,-1);
+		
+		% Draw left lines
+		\draw [postaction={decorate}] (0,-1) -- (-0.75,0.5) node[midway, left] (a){a};
+		\draw [postaction={decorate}] (0.5,0) -- (0,-1);
+		
+		% Draw right lines
+		\draw [postaction={decorate}] (1.5,-1) -- (0.75,0.5) node[midway, left] (b){b};
+		\draw [postaction={decorate}] (2.25,0.5) -- (1.5,-1) node[midway, right] (j){j};
+		
+		\draw [postaction={decorate}] (1,-1) -- (0.5,0);
+		\draw [postaction={decorate}] (1.75,0.5) -- (1,-1) node[midway, right] (i){i};
+		
+		\node[] at (5.5,-0.5) {$=-\frac{1}{2}\Phat{ab}\sum_{klcd}t_{kl}^{ca}t_{ij}^{cb}\brak{kl}{cd}$};
+		% Draw vertex point
+		%\filldraw (1,0) circle (0.05cm);
+		\end{scope}
+		
+		\end{tikzpicture}
+	\end{center}
+	%\caption{Ground state of Helium.}
+	\label{fig:c_dig}
+\end{figure}
